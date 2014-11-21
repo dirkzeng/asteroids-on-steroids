@@ -53,7 +53,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 100;//1200
+	private static final int SPAWN_NEW_SHIP_FLOATER = 350;//1200
     private static final int SPAWN_NEW_JEZZBALL = 500;
 
 
@@ -213,7 +213,7 @@ public class Game implements Runnable, KeyListener {
 					
 					tupMarkForRemovals.add(new Tuple(CommandCenter.movFloaters, movFloater));
 					Sound.playSound("pacman_eatghost.wav");
-                    if(movFloater.getFloaterType() < 6){
+                    if(movFloater.getFloaterType() < 5){
                         CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
                     }else if(movFloater.getFloaterType() < 9){
                         CommandCenter.setScore(CommandCenter.getScore() + 5000);

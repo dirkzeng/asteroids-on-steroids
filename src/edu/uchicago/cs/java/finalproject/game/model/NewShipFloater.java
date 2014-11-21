@@ -33,10 +33,10 @@ public class NewShipFloater extends Sprite {
 		setExpire(250);
 		setRadius(50);
 
-        nType = (int)(Math.random() * 10);
-        if(nType < 6) {
+        nType = (int)(Math.random() * 12);
+        if(nType < 5) {
             setColor(Color.BLUE);
-        }else if(nType < 6){
+        }else if(nType < 9){
             setColor(Color.PINK);
         }else{
             setColor(Color.ORANGE);
