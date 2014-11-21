@@ -215,10 +215,16 @@ public class Game implements Runnable, KeyListener {
 					Sound.playSound("pacman_eatghost.wav");
                     if(movFloater.getFloaterType() < 6){
                         CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
-                    }else if(movFloater.getFloaterType() < 6){
+                    }else if(movFloater.getFloaterType() < 9){
                         CommandCenter.setScore(CommandCenter.getScore() + 5000);
                     }else {
                         tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new NuclearDebris()));
+                        //protect falcon from getting hit right after nuker and while nuke
+                        CommandCenter.getFalcon().setProtected(true);
+                        //kill all the foes from nuke
+                        for(Movable foe : CommandCenter.movFoes){
+                            killFoe(foe);
+                        }
                     }
 	
 				}//end if 
