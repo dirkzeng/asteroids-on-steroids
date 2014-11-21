@@ -14,7 +14,9 @@ public interface Movable {
 	//when a foe explodes, your points increase
 	public int points();
 	
-	
+	public int getFloaterType(); //only for NewShipFloater
+    public void floaterPower(int t); //only for NewShipFloater
+
 	public Point getCenter();
 	public int getRadius();
 	//for short-lasting objects only like powerUps, bullets, special weapons and UFOs

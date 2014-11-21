@@ -11,6 +11,7 @@ public class NewShipFloater extends Sprite {
 
 
 	private int nSpin;
+    private int nType; //which power up... 0 is blue, 1 is pink, 2 is orange
 
 	public NewShipFloater() {
 
@@ -31,7 +32,18 @@ public class NewShipFloater extends Sprite {
 
 		setExpire(250);
 		setRadius(50);
-		setColor(Color.BLUE);
+
+        int nT = (int)(Math.random() * 3);
+        if(nT == 0) {
+            nType = 0;
+            setColor(Color.BLUE);
+        }else if(nT == 1){
+            nType = 1;
+            setColor(Color.PINK);
+        }else if(nT == 2){
+            nType = 2;
+            setColor(Color.ORANGE);
+        }
 
 
 		int nX = Game.R.nextInt(10);
@@ -64,6 +76,20 @@ public class NewShipFloater extends Sprite {
 		 setOrientation(Game.R.nextInt(360));
 
 	}
+
+    public int getFloaterType(){
+        return nType;//0 is blue, 1 is pink, 2 is orange
+    }
+
+    public void floaterPower(int t){
+        if(t == 0){
+            CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
+        }else if(t == 1){
+
+        }else if(t == 2){
+
+        }
+    }
 
 	public void move() {
 		super.move();

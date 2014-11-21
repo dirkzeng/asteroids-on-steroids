@@ -53,7 +53,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 1200;
+	private static final int SPAWN_NEW_SHIP_FLOATER = 500;//1200
 
 
 
@@ -211,6 +211,7 @@ public class Game implements Runnable, KeyListener {
 					
 					tupMarkForRemovals.add(new Tuple(CommandCenter.movFloaters, movFloater));
 					Sound.playSound("pacman_eatghost.wav");
+                    movFloater.floaterPower(movFloater.getFloaterType());
 	
 				}//end if 
 			}//end inner for
