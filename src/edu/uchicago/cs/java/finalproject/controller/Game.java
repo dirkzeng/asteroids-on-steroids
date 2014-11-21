@@ -53,8 +53,8 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 500;//1200
-    private static final int SPAWN_NEW_JEZZBALL = 400;
+	private static final int SPAWN_NEW_SHIP_FLOATER = 400;//1200
+    private static final int SPAWN_NEW_JEZZBALL = 500;
 
 
 
@@ -258,6 +258,9 @@ public class Game implements Runnable, KeyListener {
 			}
             else if(astExploded.getSize() == 2){
                 CommandCenter.setScore(CommandCenter.getScore() + 700);
+                int nSpin = ((Asteroid) movFoe).getSpin();
+                Point point = movFoe.getCenter();
+                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new AsteroidDebris(nSpin,point)));
             }
 			//remove the original Foe	
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));

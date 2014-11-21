@@ -325,6 +325,7 @@ public abstract class Sprite implements Movable {
 		nFade = n;
 	}
 
+    ////////////////////////////
     public int getFloaterType(){
         return 0;
     }

@@ -33,15 +33,12 @@ public class NewShipFloater extends Sprite {
 		setExpire(250);
 		setRadius(50);
 
-        int nT = (int)(Math.random() * 3);
-        if(nT == 0) {
-            nType = 0;
+        nType = (int)(Math.random() * 10);
+        if(nType < 6) {
             setColor(Color.BLUE);
-        }else if(nT == 1){
-            nType = 1;
+        }else if(nType < 9){
             setColor(Color.PINK);
-        }else if(nT == 2){
-            nType = 2;
+        }else{
             setColor(Color.ORANGE);
         }
 
@@ -82,11 +79,11 @@ public class NewShipFloater extends Sprite {
     }
 
     public void floaterPower(int t){
-        if(t == 0){
+        if(t < 6){
             CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
-        }else if(t == 1){
-
-        }else if(t == 2){
+        }else if(t < 9){
+            CommandCenter.setScore(CommandCenter.getScore() + 5000);
+        }else {
 
         }
     }
