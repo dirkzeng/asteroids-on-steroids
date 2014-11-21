@@ -15,7 +15,6 @@ public interface Movable {
 	public int points();
 	
 	public int getFloaterType(); //only for NewShipFloater
-    public void floaterPower(int t); //only for NewShipFloater
 
 	public Point getCenter();
 	public int getRadius();

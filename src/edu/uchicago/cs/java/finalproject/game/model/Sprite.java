@@ -330,7 +330,4 @@ public abstract class Sprite implements Movable {
         return 0;
     }
 
-    public void floaterPower(int t){
-
-    }
 }

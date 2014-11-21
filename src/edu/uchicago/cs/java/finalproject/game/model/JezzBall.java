@@ -14,7 +14,7 @@ public class JezzBall extends Sprite {
     private int nSpin;
 
     //radius of a jezzball
-    private final int RAD = 10;
+    private final int RAD = 15;
 
     public JezzBall(){
 

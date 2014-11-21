@@ -36,7 +36,7 @@ public class NewShipFloater extends Sprite {
         nType = (int)(Math.random() * 10);
         if(nType < 6) {
             setColor(Color.BLUE);
-        }else if(nType < 9){
+        }else if(nType < 6){
             setColor(Color.PINK);
         }else{
             setColor(Color.ORANGE);
@@ -75,18 +75,7 @@ public class NewShipFloater extends Sprite {
 	}
 
     public int getFloaterType(){
-        return nType;//0 is blue, 1 is pink, 2 is orange
-    }
-
-    public void floaterPower(int t){
-        if(t < 6){
-            CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
-        }else if(t < 9){
-            CommandCenter.setScore(CommandCenter.getScore() + 5000);
-        }else {
-
-        }
-    }
+        return nType;}//0 is blue, 1 is pink, 2 is orange
 
 	public void move() {
 		super.move();

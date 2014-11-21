@@ -53,7 +53,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 400;//1200
+	private static final int SPAWN_NEW_SHIP_FLOATER = 100;//1200
     private static final int SPAWN_NEW_JEZZBALL = 500;
 
 
@@ -213,7 +213,13 @@ public class Game implements Runnable, KeyListener {
 					
 					tupMarkForRemovals.add(new Tuple(CommandCenter.movFloaters, movFloater));
 					Sound.playSound("pacman_eatghost.wav");
-                    movFloater.floaterPower(movFloater.getFloaterType());
+                    if(movFloater.getFloaterType() < 6){
+                        CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
+                    }else if(movFloater.getFloaterType() < 6){
+                        CommandCenter.setScore(CommandCenter.getScore() + 5000);
+                    }else {
+                        tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new NuclearDebris()));
+                    }
 	
 				}//end if 
 			}//end inner for
@@ -257,10 +263,10 @@ public class Game implements Runnable, KeyListener {
                 CommandCenter.setScore(CommandCenter.getScore() + 300);
 			}
             else if(astExploded.getSize() == 2){
-                CommandCenter.setScore(CommandCenter.getScore() + 700);
                 int nSpin = ((Asteroid) movFoe).getSpin();
                 Point point = movFoe.getCenter();
                 tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new AsteroidDebris(nSpin,point)));
+                CommandCenter.setScore(CommandCenter.getScore() + 700);
             }
 			//remove the original Foe	
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
