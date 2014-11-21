@@ -242,6 +242,7 @@ public class Game implements Runnable, KeyListener {
 				//spawn two medium Asteroids
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
+                CommandCenter.setScore(CommandCenter.getScore() + 100);
 				
 			} 
 			//medium size aseroid exploded
@@ -250,24 +251,25 @@ public class Game implements Runnable, KeyListener {
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
+                CommandCenter.setScore(CommandCenter.getScore() + 300);
 			}
+            else if(astExploded.getSize() == 2){
+                CommandCenter.setScore(CommandCenter.getScore() + 700);
+            }
 			//remove the original Foe	
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
-		
+
 			
-		} 
+		}
 		//not an asteroid
 		else {
 			//remove the original Foe
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
 		}
-		
-		
-		
+        if(movFoe instanceof JezzBall) {
+            CommandCenter.setScore(CommandCenter.getScore() + 1500);
+        }
 
-		
-		
-		
 		
 	}
 

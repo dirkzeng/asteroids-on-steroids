@@ -66,9 +66,9 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		g.setColor(Color.white);
 		g.setFont(fnt);
 		if (CommandCenter.getScore() != 0) {
-			g.drawString("SCORE :  " + CommandCenter.getScore(), nFontWidth, nFontHeight);
+			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          SCORE :  " + CommandCenter.getScore(), nFontWidth, nFontHeight);
 		} else {
-			g.drawString("NO SCORE", nFontWidth, nFontHeight);
+			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE", nFontWidth, nFontHeight);
 		}
 	}
 	
@@ -152,7 +152,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		}
 		
 		//set the color to white
-		g.setColor(Color.white);
+		g.setColor(Color.GREEN);
 		//for each falcon left (not including the one that is playing)
 		for (int nD = 1; nD < CommandCenter.getNumFalcons(); nD++) {
 			//create x and y values for the objects to the bottom right using cartesean points again
