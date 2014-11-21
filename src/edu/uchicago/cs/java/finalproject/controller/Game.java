@@ -54,6 +54,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpMusicBackground;
 
 	private static final int SPAWN_NEW_SHIP_FLOATER = 500;//1200
+    private static final int SPAWN_NEW_JEZZBALL = 400;
 
 
 
@@ -111,6 +112,7 @@ public class Game implements Runnable, KeyListener {
 		while (Thread.currentThread() == thrAnim) {
 			tick();
 			spawnNewShipFloater();
+            spawnJezzball();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
 														// surround the sleep() in a try/catch block
 														// this simply controls delay time between 
@@ -306,8 +308,8 @@ public class Game implements Runnable, KeyListener {
 		   // clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
-    private void spawnJezzball(int nNum){
-        for(int nC = 0; nC < nNum; nC++){
+    private void spawnJezzball(){
+        if (nTick % (SPAWN_NEW_JEZZBALL - nLevel * 7) == 0){
             CommandCenter.movFoes.add(new JezzBall());
         }
     }
@@ -344,7 +346,8 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getFalcon().setProtected(true);
 			
 			spawnAsteroids(CommandCenter.getLevel() + 2);
-            spawnJezzball(CommandCenter.getLevel() + 2);
+            /*spawn a new jezzball every level*/
+            CommandCenter.movFoes.add(new JezzBall());
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
 
 		}
