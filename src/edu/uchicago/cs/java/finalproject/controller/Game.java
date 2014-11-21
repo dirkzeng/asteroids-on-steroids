@@ -22,7 +22,7 @@ public class Game implements Runnable, KeyListener {
 	// FIELDS
 	// ===============================================
 
-	public static final Dimension DIM = new Dimension(1100, 900); //the dimension of the game.
+	public static final Dimension DIM = new Dimension(1100, 800); //the dimension of the game. (should be 1100,900)
 	private GamePanel gmpPanel;
 	public static Random R = new Random();
 	public final static int ANI_DELAY = 45; // milliseconds between screen
@@ -303,6 +303,12 @@ public class Game implements Runnable, KeyListener {
 		   // clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
+    private void spawnJezzball(int nNum){
+        for(int nC = 0; nC < nNum; nC++){
+            CommandCenter.movFoes.add(new JezzBall());
+        }
+    }
+
 	//this method spawns new asteroids
 	private void spawnAsteroids(int nNum) {
 		for (int nC = 0; nC < nNum; nC++) {
@@ -335,6 +341,7 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getFalcon().setProtected(true);
 			
 			spawnAsteroids(CommandCenter.getLevel() + 2);
+            spawnJezzball(CommandCenter.getLevel() + 2);
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
 
 		}
