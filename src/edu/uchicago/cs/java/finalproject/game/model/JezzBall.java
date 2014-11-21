@@ -93,4 +93,14 @@ public class JezzBall extends Sprite {
         this.nSpin = nSpin;
     }
 
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+        //fill this polygon (with whatever color it has)
+        g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        //now draw a white border
+        g.setColor(Color.ORANGE);
+        g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+    }
+
 }
