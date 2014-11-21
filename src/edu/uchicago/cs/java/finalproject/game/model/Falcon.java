@@ -13,8 +13,7 @@ public class Falcon extends Sprite {
 	// ==============================================================
 	// FIELDS 
 	// ==============================================================
-	
-	private final double THRUST = .65;
+    private final double THRUST = .65;
 
 	final int DEGREE_STEP = 7;
 	
