@@ -161,6 +161,7 @@ public class Falcon extends Sprite {
 					getFadeValue(), 175), getFadeValue());
 		}
 
+
 //		//shield on
 //		if (bShield && nShield > 0) {
 //
@@ -175,7 +176,7 @@ public class Falcon extends Sprite {
 
 		//thrusting
 		if (bFlame) {
-			g.setColor(colShip);
+			g.setColor(Color.RED);
 			//the flame
 			for (int nC = 0; nC < FLAME.length; nC++) {
 				if (nC % 2 != 0) //odd
@@ -211,6 +212,8 @@ public class Falcon extends Sprite {
 
 			//g.setColor( Color.white );
 			g.fillPolygon(nXFlames, nYFlames, FLAME.length);
+            g.setColor(Color.YELLOW);
+            g.drawPolygon(nXFlames,nYFlames, FLAME.length);
 
 		} //end if flame
 
@@ -221,7 +224,13 @@ public class Falcon extends Sprite {
 	public void drawShipWithColor(Graphics g, Color col) {
 		super.draw(g);
 		g.setColor(col);
-		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        if(bProtected) {
+            g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        }else {
+            g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+            g.setColor(Color.MAGENTA);
+            g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        }
 	}
 
 	public void fadeInOut() {
