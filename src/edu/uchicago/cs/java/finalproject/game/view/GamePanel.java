@@ -85,7 +85,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		grpOff.fillRect(0, 0, Game.DIM.width, Game.DIM.height);
 
 		drawScore(grpOff);
-		
+		drawNumberNukesLeft(grpOff);
+
 		if (!CommandCenter.isPlaying()) {
 			displayTextOnScreen();
 		} else if (CommandCenter.isPaused()) {
@@ -104,8 +105,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 			           CommandCenter.movFloaters, 
 			           CommandCenter.movFoes,
 			           CommandCenter.movFriends);
-			
-			
+
+
 			drawNumberShipsLeft(grpOff);
 			if (CommandCenter.isGameOver()) {
 				CommandCenter.setPlaying(false);
@@ -132,7 +133,16 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		}
 		
 	}
-	
+
+    private void drawNumberNukesLeft(Graphics g){
+        int nX = Game.DIM.width - 1080;
+        int nY = Game.DIM.height - 40;
+        for(int nC = 0; nC < CommandCenter.getNumNuke(); nC++){
+            g.drawString("NUKE", nX, nY);
+
+            nX = nX + 20;
+        }
+    }
 
 	// Draw the number of falcons left on the bottom-right of the screen. 
 	private void drawNumberShipsLeft(Graphics g) {
