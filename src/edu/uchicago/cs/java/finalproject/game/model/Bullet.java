@@ -47,6 +47,33 @@ public Bullet(Falcon fal){
 
 	}
 
+    @Override
+    public void move() {
+
+        Point pnt = getCenter();
+        double dX = pnt.x + getDeltaX();
+        double dY = pnt.y + getDeltaY();
+        setCenter(new Point((int) dX, (int) dY));
+
+        /*BULLETS FLY OFF SCREEN AND DO NOT WRAP AROUND*/
+
+        //this just keeps the sprite inside the bounds of the frame
+        /*if (pnt.x > getDim().width) {
+            setCenter(new Point(1, pnt.y));
+
+        } else if (pnt.x < 0) {
+            setCenter(new Point(getDim().width - 1, pnt.y));
+        } else if (pnt.y > getDim().height) {
+            setCenter(new Point(pnt.x, 1));
+        } else if (pnt.y < 0) {
+            setCenter(new Point(pnt.x, getDim().height - 1));
+        } else {
+
+            setCenter(new Point((int) dX, (int) dY));
+        }*/
+
+    }
+
     //override the expire method - once an object expires, then remove it from the arrayList. 
 	public void expire(){
  		if (getExpire() == 0)
