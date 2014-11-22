@@ -58,6 +58,7 @@ public class JezzballDebris extends Sprite{
         if (getExpire() == 0)
             CommandCenter.movDebris.remove(this);
         else
+            assignRandomShape();
             setExpire(getExpire() - 1);
     }
 
@@ -109,7 +110,7 @@ public class JezzballDebris extends Sprite{
         }else{
             setColor(Color.MAGENTA);
         }
-        setRadius((int)(getRadius()*1.3));
+        setRadius((int)(getRadius()*1.5));
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
         //now draw a white border

@@ -197,6 +197,33 @@ public class Game implements Runnable, KeyListener {
 		}//end outer for
 
 
+
+
+        /*check collisions between debris and foes*/
+        Point pntDebrisCenter;
+        int nDebrisRadiux;
+
+        for (Movable movDebris : CommandCenter.movDebris) {
+            for (Movable movFoe : CommandCenter.movFoes) {
+
+                if((movDebris instanceof JezzballDebris)) {
+                    pntDebrisCenter = movDebris.getCenter();
+                    pntFoeCenter = movFoe.getCenter();
+                    nDebrisRadiux = movDebris.getRadius();
+                    nFoeRadiux = movFoe.getRadius();
+
+                    //detect collision
+                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
+                        killFoe(movFoe);
+                    }//end else
+
+                    //explode/remove foe
+                }
+
+
+            }
+        }
+
 		//check for collisions between falcon and floaters
 		if (CommandCenter.getFalcon() != null){
 			Point pntFalCenter = CommandCenter.getFalcon().getCenter();

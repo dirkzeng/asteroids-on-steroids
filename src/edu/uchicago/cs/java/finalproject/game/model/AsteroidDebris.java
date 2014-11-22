@@ -58,6 +58,7 @@ public class AsteroidDebris extends Sprite {
         if (getExpire() == 0)
             CommandCenter.movDebris.remove(this);
         else
+            assignRandomShape();
             setExpire(getExpire() - 1);
     }
 

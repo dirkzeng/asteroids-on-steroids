@@ -32,15 +32,17 @@ public class NuclearDebris extends Sprite{
         setColor(Color.RED);
         setRadius(RAD);
 
-        setExpire(10);
+        setExpire(4);
     }
+
 
     @Override
     public void expire() {
-        if (getExpire() == 0)
+        if (getExpire() == 0) {
             CommandCenter.movDebris.remove(this);
-        else
+        }else {
             setExpire(getExpire() - 1);
+        }
     }
 
     @Override
