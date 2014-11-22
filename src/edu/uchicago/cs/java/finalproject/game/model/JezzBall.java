@@ -25,7 +25,7 @@ public class JezzBall extends Sprite {
         setDeltaX(7);
         setDeltaY(7);
 
-        ArrayList<Point> pntCs = new ArrayList<Point>();
+        /*ArrayList<Point> pntCs = new ArrayList<Point>();
 
         // circle jezzball
         pntCs.add(new Point(0, 10));
@@ -39,7 +39,9 @@ public class JezzBall extends Sprite {
 
 
 
-        assignPolarPoints(pntCs);
+        assignPolarPoints(pntCs);*/
+
+        assignRandomShape();
 
         setColor(Color.RED);
 
@@ -101,6 +103,43 @@ public class JezzBall extends Sprite {
         //now draw a white border
         g.setColor(Color.ORANGE);
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+    }
+
+    public void assignRandomShape ()
+    {
+        int nSide = Game.R.nextInt( 7 ) + 7;
+        int nSidesTemp = nSide;
+
+        int[] nSides = new int[nSide];
+        for ( int nC = 0; nC < nSides.length; nC++ )
+        {
+            int n = nC * 48 / nSides.length - 4 + Game.R.nextInt( 8 );
+            if ( n >= 48 || n < 0 )
+            {
+                n = 0;
+                nSidesTemp--;
+            }
+            nSides[nC] = n;
+        }
+
+        Arrays.sort( nSides );
+
+        double[]  dDegrees = new double[nSidesTemp];
+        for ( int nC = 0; nC <dDegrees.length; nC++ )
+        {
+            dDegrees[nC] = nSides[nC] * Math.PI / 24 + Math.PI / 2;
+        }
+        setDegrees( dDegrees);
+
+        double[] dLengths = new double[dDegrees.length];
+        for (int nC = 0; nC < dDegrees.length; nC++) {
+            if(nC %3 == 0)
+                dLengths[nC] = 1 - Game.R.nextInt(40)/100.0;
+            else
+                dLengths[nC] = 1;
+        }
+        setLengths(dLengths);
+
     }
 
 }

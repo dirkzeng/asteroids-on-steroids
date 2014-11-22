@@ -66,7 +66,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		g.setColor(Color.white);
 		g.setFont(fnt);
 		if (CommandCenter.getScore() != 0) {
-			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          SCORE :  " + CommandCenter.getScore() + " Nukes: " + CommandCenter.getNumNuke(), nFontWidth, nFontHeight);
+			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          SCORE :  " + CommandCenter.getScore(), nFontWidth, nFontHeight);
 		} else {
 			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE", nFontWidth, nFontHeight);
 		}
@@ -135,12 +135,12 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 	}
 
     private void drawNumberNukesLeft(Graphics g){
-        int nX = Game.DIM.width - 1080;
+        int nX = Game.DIM.width - 1090;
         int nY = Game.DIM.height - 40;
         for(int nC = 0; nC < CommandCenter.getNumNuke(); nC++){
-            g.drawString("NUKE", nX, nY);
+            g.drawString("N", nX, nY);
 
-            nX = nX + 20;
+            nX = nX + 15;
         }
     }
 

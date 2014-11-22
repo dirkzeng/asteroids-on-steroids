@@ -273,16 +273,18 @@ public class Game implements Runnable, KeyListener {
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
 
 			
-		}
+		}else if(movFoe instanceof JezzBall){
+            CommandCenter.setScore(CommandCenter.getScore() + 1500);
+            int nSpin = ((JezzBall) movFoe).getSpin();
+            Point point = movFoe.getCenter();
+            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));
+            tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
+        }
 		//not an asteroid
 		else {
 			//remove the original Foe
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
 		}
-        if(movFoe instanceof JezzBall) {
-            CommandCenter.setScore(CommandCenter.getScore() + 1500);
-        }
-
 		
 	}
 
