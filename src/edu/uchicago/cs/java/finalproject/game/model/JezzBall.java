@@ -22,9 +22,10 @@ public class JezzBall extends Sprite {
         super();
 
         setSpin(7);
-        setDeltaX(7);
-        setDeltaY(7);
+        setDeltaX(10);
+        setDeltaY(10);
 
+        setExpire(200);
         /*ArrayList<Point> pntCs = new ArrayList<Point>();
 
         // circle jezzball
@@ -84,6 +85,14 @@ public class JezzBall extends Sprite {
         //a jezzball spins, so you need to adjust the orientation at each move()
         setOrientation(getOrientation() + getSpin());
 
+    }
+
+    //override the expire method - once an object expires, then remove it from the arrayList.
+    public void expire(){
+        if (getExpire() == 0)
+            CommandCenter.movFoes.remove(this);
+        else
+            setExpire(getExpire() - 1);
     }
 
     public int getSpin() {
