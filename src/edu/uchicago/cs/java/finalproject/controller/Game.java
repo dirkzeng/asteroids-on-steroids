@@ -178,6 +178,8 @@ public class Game implements Runnable, KeyListener {
 					if ((movFriend instanceof Falcon) ){
 						if (!CommandCenter.getFalcon().getProtected()){
 							tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
+                            Point point = movFriend.getCenter();
+                            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconDebris(point)));
 							CommandCenter.spawnFalcon(false);
 							killFoe(movFoe);
 						}
