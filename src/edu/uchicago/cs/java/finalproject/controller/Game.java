@@ -40,6 +40,7 @@ public class Game implements Runnable, KeyListener {
 			LEFT = 37, // rotate left; left arrow
 			RIGHT = 39, // rotate right; right arrow
 			UP = 38, // thrust; up arrow
+            DOWN = 40, //break: down arrow
 			START = 83, // s key
 			FIRE = 32, // space key
 			MUTE = 77, // m-key mute
@@ -462,6 +463,9 @@ public class Game implements Runnable, KeyListener {
 				if (!CommandCenter.isPaused())
 					clpThrust.loop(Clip.LOOP_CONTINUOUSLY);
 				break;
+            case DOWN:
+                fal.breakOn();
+                break;
 			case LEFT:
 				fal.rotateLeft();
 				break;
@@ -514,7 +518,9 @@ public class Game implements Runnable, KeyListener {
 				fal.thrustOff();
 				clpThrust.stop();
 				break;
-				
+            case DOWN:
+                fal.breakOff();
+                break;
 			case MUTE:
 				if (!bMuted){
 					stopLoopingSounds(clpMusicBackground);

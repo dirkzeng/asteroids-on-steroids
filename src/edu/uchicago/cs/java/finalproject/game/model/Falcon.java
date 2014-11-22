@@ -24,6 +24,7 @@ public class Falcon extends Sprite {
 	private boolean bThrusting = false;
 	private boolean bTurningRight = false;
 	private boolean bTurningLeft = false;
+    private boolean bBreaking = false;
 	
 	private int nShield;
 			
@@ -96,56 +97,62 @@ public class Falcon extends Sprite {
 
 	public void move() {
 		//super.move();
-        Point pnt = getCenter();
-        double dX = pnt.x + getDeltaX();
-        double dY = pnt.y + getDeltaY();
+        if(bBreaking) {
+            setDeltaX(0);
+            setDeltaY(0);
+        }else{
+            super.move();
+            /*Point pnt = getCenter();
+            double dX = pnt.x + getDeltaX();
+            double dY = pnt.y + getDeltaY();
 
-        //this just keeps the sprite inside the bounds of the frame
-        /*THIS ACTUALLY MAKES THE SPRITE BOUNCE*/
-        if (pnt.x > getDim().width) {
-            //setCenter(new Point(1, pnt.y));
-            setCenter(new Point(getDim().width - 1, pnt.y));
-            setDeltaX(getDeltaX() * -1);
+            //this just keeps the sprite inside the bounds of the frame
+        //THIS ACTUALLY MAKES THE SPRITE BOUNCE
+            if (pnt.x > getDim().width) {
+                //setCenter(new Point(1, pnt.y));
+                setCenter(new Point(getDim().width - 1, pnt.y));
+                setDeltaX(getDeltaX() * -1);
 
-        } else if (pnt.x < 0) {
-            //setCenter(new Point(getDim().width - 1, pnt.y));
-            setCenter(new Point(1, pnt.y));
-            setDeltaX(getDeltaX() * -1);
-        } else if (pnt.y > getDim().height) {
-            //setCenter(new Point(pnt.x, 1));
-            setCenter(new Point(pnt.x, getDim().height - 1));
-            setDeltaY(getDeltaY() * -1);
-        } else if (pnt.y < 0) {
-            //setCenter(new Point(pnt.x, getDim().height - 1));
-            setCenter(new Point(pnt.x, 1));
-            setDeltaY(getDeltaY() * -1);
-        } else {
+            } else if (pnt.x < 0) {
+                //setCenter(new Point(getDim().width - 1, pnt.y));
+                setCenter(new Point(1, pnt.y));
+                setDeltaX(getDeltaX() * -1);
+            } else if (pnt.y > getDim().height) {
+                //setCenter(new Point(pnt.x, 1));
+                setCenter(new Point(pnt.x, getDim().height - 1));
+                setDeltaY(getDeltaY() * -1);
+            } else if (pnt.y < 0) {
+                //setCenter(new Point(pnt.x, getDim().height - 1));
+                setCenter(new Point(pnt.x, 1));
+                setDeltaY(getDeltaY() * -1);
+            } else {
 
-            setCenter(new Point((int) dX, (int) dY));
+                setCenter(new Point((int) dX, (int) dY));
+            }*/
+
+            if (bThrusting) {
+                bFlame = true;
+                double dAdjustX = Math.cos(Math.toRadians(getOrientation()))
+                        * THRUST;
+                double dAdjustY = Math.sin(Math.toRadians(getOrientation()))
+                        * THRUST;
+                setDeltaX(getDeltaX() + dAdjustX);
+                setDeltaY(getDeltaY() + dAdjustY);
+            }
+            if (bTurningLeft) {
+
+                if (getOrientation() <= 0 && bTurningLeft) {
+                    setOrientation(360);
+                }
+                setOrientation(getOrientation() - DEGREE_STEP);
+            }
+            if (bTurningRight) {
+                if (getOrientation() >= 360 && bTurningRight) {
+                    setOrientation(0);
+                }
+                setOrientation(getOrientation() + DEGREE_STEP);
+            }
         }
-
-		if (bThrusting) {
-			bFlame = true;
-			double dAdjustX = Math.cos(Math.toRadians(getOrientation()))
-					* THRUST;
-			double dAdjustY = Math.sin(Math.toRadians(getOrientation()))
-					* THRUST;
-			setDeltaX(getDeltaX() + dAdjustX);
-			setDeltaY(getDeltaY() + dAdjustY);
-		}
-		if (bTurningLeft) {
-
-			if (getOrientation() <= 0 && bTurningLeft) {
-				setOrientation(360);
-			}
-			setOrientation(getOrientation() - DEGREE_STEP);
-		} 
-		if (bTurningRight) {
-			if (getOrientation() >= 360 && bTurningRight) {
-				setOrientation(0);
-			}
-			setOrientation(getOrientation() + DEGREE_STEP);
-		} 
 	} //end move
 
 	public void rotateLeft() {
@@ -169,6 +176,14 @@ public class Falcon extends Sprite {
 		bThrusting = false;
 		bFlame = false;
 	}
+
+    public void breakOn(){
+        bBreaking = true;
+    }
+
+    public void breakOff(){
+        bBreaking = false;
+    }
 
 	private int adjustColor(int nCol, int nAdj) {
 		if (nCol - nAdj <= 0) {
@@ -242,6 +257,7 @@ public class Falcon extends Sprite {
 			g.fillPolygon(nXFlames, nYFlames, FLAME.length);
             g.setColor(Color.YELLOW);
             g.drawPolygon(nXFlames,nYFlames, FLAME.length);
+
 
 		} //end if flame
 

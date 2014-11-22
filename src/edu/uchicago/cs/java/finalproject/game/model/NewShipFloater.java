@@ -40,7 +40,6 @@ public class NewShipFloater extends Sprite {
             setColor(Color.ORANGE);
         }
 
-
 		int nX = Game.R.nextInt(10);
 		int nY = Game.R.nextInt(10);
 		int nS = Game.R.nextInt(5);
