@@ -1,8 +1,6 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 
 import edu.uchicago.cs.java.finalproject.controller.Game;
@@ -36,7 +34,7 @@ public class NewShipFloater extends Sprite {
         nType = (int)(Math.random() * 12);
         if(nType < 5) {
             setColor(Color.BLUE);
-        }else if(nType < 9){
+        }else if(nType < 8){
             setColor(Color.PINK);
         }else{
             setColor(Color.ORANGE);
@@ -75,7 +73,7 @@ public class NewShipFloater extends Sprite {
 	}
 
     public int getFloaterType(){
-        return nType;}//0 is blue, 1 is pink, 2 is orange
+        return nType;}//0-4 is blue, 5-7  is pink, 8-11 is orange
 
 	public void move() {
 		super.move();
@@ -109,6 +107,20 @@ public class NewShipFloater extends Sprite {
 		//now draw a white border
 		g.setColor(Color.WHITE);
 		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        Point point = this.getCenter();
+        int x = (int)(point.getX()) - 11;
+        int y = (int)(point.getY()) + 9;
+        String strFloater= "";
+        if(nType < 5){
+            strFloater = "L";
+        }else if(nType < 8){
+            strFloater = "5";
+        }else{
+            strFloater = "N";
+        }
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("",Font.BOLD,30));
+        g.drawString(strFloater,x,y);
 	}
 
 }

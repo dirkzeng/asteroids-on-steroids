@@ -43,6 +43,7 @@ public class Game implements Runnable, KeyListener {
 			START = 83, // s key
 			FIRE = 32, // space key
 			MUTE = 77, // m-key mute
+            NUKE = 78, //n-key does nuke
 
 	// for possible future use
 	// HYPER = 68, 					// d key
@@ -53,7 +54,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 350;//1200
+	private static final int SPAWN_NEW_SHIP_FLOATER = 50;//1200
     private static final int SPAWN_NEW_JEZZBALL = 500;
 
 
@@ -215,16 +216,10 @@ public class Game implements Runnable, KeyListener {
 					Sound.playSound("pacman_eatghost.wav");
                     if(movFloater.getFloaterType() < 5){
                         CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
-                    }else if(movFloater.getFloaterType() < 9){
+                    }else if(movFloater.getFloaterType() < 8){
                         CommandCenter.setScore(CommandCenter.getScore() + 5000);
                     }else {
-                        tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new NuclearDebris()));
-                        //protect falcon from getting hit right after nuker and while nuke
-                        CommandCenter.getFalcon().setProtected(true);
-                        //kill all the foes from nuke
-                        for(Movable foe : CommandCenter.movFoes){
-                            killFoe(foe);
-                        }
+                        CommandCenter.setNumNuke(CommandCenter.getNumNuke() + 1);
                     }
 	
 				}//end if 
@@ -290,6 +285,33 @@ public class Game implements Runnable, KeyListener {
 
 		
 	}
+
+    private void releaseNuke(){
+        if(CommandCenter.getNumNuke() > 0) {
+            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new NuclearDebris()));
+            //protect falcon from getting hit right after nuke and while nuke
+            CommandCenter.getFalcon().setProtected(true);
+            //kill all the foes from nuke
+            for (Movable foe : CommandCenter.movFoes) {
+                killFoe(foe);
+            }
+
+            //remove these objects from their appropriate ArrayLists
+            //this happens after the above iterations are done
+            for (Tuple tup : tupMarkForRemovals)
+                tup.removeMovable();
+
+            //add these objects to their appropriate ArrayLists
+            //this happens after the above iterations are done
+            for (Tuple tup : tupMarkForAdds)
+                tup.addMovable();
+
+            //call garbage collection
+            System.gc();
+
+            CommandCenter.setNumNuke(CommandCenter.getNumNuke() - 1);
+        }
+    }
 
 	//some methods for timing events in the game,
 	//such as the appearance of UFOs, floaters (power-ups), etc. 
@@ -415,6 +437,11 @@ public class Game implements Runnable, KeyListener {
 			case RIGHT:
 				fal.rotateRight();
 				break;
+
+            case NUKE:
+                releaseNuke();
+                break;
+
 
 			// possible future use
 			// case KILL:
