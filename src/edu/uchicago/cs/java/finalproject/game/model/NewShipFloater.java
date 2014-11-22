@@ -114,7 +114,7 @@ public class NewShipFloater extends Sprite {
         if(nType < 5){
             strFloater = "L";
         }else if(nType < 8){
-            strFloater = "5";
+            strFloater = "P";
         }else{
             strFloater = "N";
         }

@@ -217,7 +217,7 @@ public class Game implements Runnable, KeyListener {
                     if(movFloater.getFloaterType() < 5){
                         CommandCenter.setNumFalcons(CommandCenter.getNumFalcons() + 1);
                     }else if(movFloater.getFloaterType() < 8){
-                        CommandCenter.setScore(CommandCenter.getScore() + 5000);
+                        CommandCenter.setScore(CommandCenter.getScore() + 1500);
                     }else {
                         CommandCenter.setNumNuke(CommandCenter.getNumNuke() + 1);
                     }
@@ -274,7 +274,7 @@ public class Game implements Runnable, KeyListener {
 
 			
 		}else if(movFoe instanceof JezzBall){
-            CommandCenter.setScore(CommandCenter.getScore() + 10000);
+            CommandCenter.setScore(CommandCenter.getScore() + 2500);
             int nSpin = ((JezzBall) movFoe).getSpin();
             Point point = movFoe.getCenter();
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));
