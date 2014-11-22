@@ -54,8 +54,8 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 50;//1200
-    private static final int SPAWN_NEW_JEZZBALL = 500;
+	private static final int SPAWN_NEW_SHIP_FLOATER = 200;//1200
+    private static final int SPAWN_NEW_JEZZBALL = 400;
 
 
 
