@@ -32,7 +32,7 @@ public class AsteroidBlackHoleDebris extends Sprite {
 
         setRadius(RAD);
 
-        setExpire(6);
+        setExpire(10);
     }
 
 

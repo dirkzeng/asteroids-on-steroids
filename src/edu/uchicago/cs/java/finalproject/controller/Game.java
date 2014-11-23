@@ -215,7 +215,7 @@ public class Game implements Runnable, KeyListener {
                         nFriendRadiux = movFriend.getRadius();
                         nDebrisRadiux = movDebris.getRadius();
 
-                        if (pntDebrisCenter.distance(pntFriendCenter) < (nDebrisRadiux + nFriendRadiux + 175)) {
+                        if (pntDebrisCenter.distance(pntFriendCenter) < (nDebrisRadiux + nFriendRadiux + 110)) {
                             int nBlackX = (movFriend.getCenter().x + movDebris.getCenter().x) / 2;
                             int nBlackY = (movFriend.getCenter().y + movDebris.getCenter().y) / 2;
                             movFriend.setCenter(new Point(nBlackX, nBlackY));
