@@ -55,7 +55,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 200;//1200
+	private static final int SPAWN_NEW_SHIP_FLOATER = 300;//1200
     private static final int SPAWN_NEW_JEZZBALL = 400;
 
 
@@ -282,7 +282,7 @@ public class Game implements Runnable, KeyListener {
 				//spawn two medium Asteroids
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
-                CommandCenter.setScore(CommandCenter.getScore() + 100);
+                CommandCenter.setScore(CommandCenter.getScore() + 100 * CommandCenter.getLevel());
 				
 			} 
 			//medium size aseroid exploded
@@ -291,20 +291,20 @@ public class Game implements Runnable, KeyListener {
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
 				tupMarkForAdds.add(new Tuple(CommandCenter.movFoes,new Asteroid(astExploded)));
-                CommandCenter.setScore(CommandCenter.getScore() + 300);
+                CommandCenter.setScore(CommandCenter.getScore() + 300 * CommandCenter.getLevel());
 			}
             else if(astExploded.getSize() == 2){
                 int nSpin = ((Asteroid) movFoe).getSpin();
                 Point point = movFoe.getCenter();
                 tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new AsteroidDebris(nSpin,point)));
-                CommandCenter.setScore(CommandCenter.getScore() + 700);
+                CommandCenter.setScore(CommandCenter.getScore() + 700 * CommandCenter.getLevel());
             }
 			//remove the original Foe	
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
 
 			
 		}else if(movFoe instanceof JezzBall){
-            CommandCenter.setScore(CommandCenter.getScore() + 2500);
+            CommandCenter.setScore(CommandCenter.getScore() + 3000);
             int nSpin = ((JezzBall) movFoe).getSpin();
             Point point = movFoe.getCenter();
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));

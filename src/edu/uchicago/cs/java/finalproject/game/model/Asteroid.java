@@ -172,4 +172,5 @@ public class Asteroid extends Sprite {
 
 	  }
 
+
 }
