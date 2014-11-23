@@ -54,6 +54,7 @@ public class Game implements Runnable, KeyListener {
 
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
+    private Clip clpBreak;
 
 	private static final int SPAWN_NEW_SHIP_FLOATER = 300;//1200
     private static final int SPAWN_NEW_JEZZBALL = 400;
@@ -71,6 +72,7 @@ public class Game implements Runnable, KeyListener {
 
 		clpThrust = Sound.clipForLoopFactory("whitenoise.wav");
 		clpMusicBackground = Sound.clipForLoopFactory("music-background.wav");
+        //clpBreak = Sound.clipForLoopFactory("pacman_eatghost.wav");
 	
 
 	}
@@ -163,6 +165,8 @@ public class Game implements Runnable, KeyListener {
 
 		Point pntFriendCenter, pntFoeCenter;
 		int nFriendRadiux, nFoeRadiux;
+        Point pntDebrisCenter;
+        int nDebrisRadiux;
 
 		for (Movable movFriend : CommandCenter.movFriends) {
 			for (Movable movFoe : CommandCenter.movFoes) {
@@ -200,11 +204,42 @@ public class Game implements Runnable, KeyListener {
 		}//end outer for
 
 
+        for (Movable movFriend : CommandCenter.movFriends) {
+            for (Movable movDebris : CommandCenter.movDebris) {
+
+                if(movDebris instanceof BlackHole) {
+
+                    pntFriendCenter = movFriend.getCenter();
+                    pntDebrisCenter = movDebris.getCenter();
+                    nFriendRadiux = movFriend.getRadius();
+                    nDebrisRadiux = movDebris.getRadius();
+
+                    if (pntDebrisCenter.distance(pntFriendCenter) < (nDebrisRadiux + nFriendRadiux + 110)){
+                        int nBlackX = (movFriend.getCenter().x + movDebris.getCenter().x)/2;
+                        int nBlackY = (movFriend.getCenter().y + movDebris.getCenter().y)/2;
+                        movFriend.setCenter(new Point(nBlackX,nBlackY));
+                    }
+
+                    //detect collision
+                    if (pntFriendCenter.distance(pntDebrisCenter) < (nFriendRadiux + nDebrisRadiux)) {
+
+                        //falcon
+                        if ((movFriend instanceof Falcon)) {
+                            if (!CommandCenter.getFalcon().getProtected()) {
+                                tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
+                                Point point = movFriend.getCenter();
+                                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconBlackHoleDebris(point)));
+                                CommandCenter.spawnFalcon(false);
+                            }
+                        }
+                    }//end if
+                }
+            }//end inner for
+        }
+
 
 
         /*check collisions between debris and foes*/
-        Point pntDebrisCenter;
-        int nDebrisRadiux;
 
         for (Movable movDebris : CommandCenter.movDebris) {
             for (Movable movFoe : CommandCenter.movFoes) {
@@ -219,7 +254,25 @@ public class Game implements Runnable, KeyListener {
                     if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
                         killFoe(movFoe);
                     }//end else
+                }
 
+
+                if((movDebris instanceof BlackHole)) {
+                    pntDebrisCenter = movDebris.getCenter();
+                    pntFoeCenter = movFoe.getCenter();
+                    nDebrisRadiux = movDebris.getRadius();
+                    nFoeRadiux = movFoe.getRadius();
+
+                    //detect collision
+                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
+                        killFoe(movFoe);
+                    }//end else
+
+                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux + 110)){
+                        int nBlackX = (movFoe.getCenter().x + movDebris.getCenter().x)/2;
+                        int nBlackY = (movFoe.getCenter().y + movDebris.getCenter().y)/2;
+                        movFoe.setCenter(new Point(nBlackX,nBlackY));
+                    }
                     //explode/remove foe
                 }
 
@@ -308,6 +361,7 @@ public class Game implements Runnable, KeyListener {
             int nSpin = ((JezzBall) movFoe).getSpin();
             Point point = movFoe.getCenter();
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));
+            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new BlackHole(point)));
             tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
         }
 		//not an asteroid
@@ -465,6 +519,8 @@ public class Game implements Runnable, KeyListener {
 				break;
             case DOWN:
                 fal.breakOn();
+                //if (!CommandCenter.isPaused())
+                  //  clpBreak.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
 			case LEFT:
 				fal.rotateLeft();
@@ -520,6 +576,7 @@ public class Game implements Runnable, KeyListener {
 				break;
             case DOWN:
                 fal.breakOff();
+                //clpBreak.stop();
                 break;
 			case MUTE:
 				if (!bMuted){

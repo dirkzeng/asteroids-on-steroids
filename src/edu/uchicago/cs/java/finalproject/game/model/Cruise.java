@@ -86,7 +86,8 @@ public class Cruise extends Sprite {
 			setDeltaX(getDeltaX() * 1.07);
 			setDeltaY(getDeltaY() * 1.07);
 		}
-		
+
+
 
 
 	}

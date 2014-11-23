@@ -261,10 +261,6 @@ public class Falcon extends Sprite {
 
 		} //end if flame
 
-        /*if(bBreaking){
-
-        }*/
-
 
 		drawShipWithColor(g, colShip);
 

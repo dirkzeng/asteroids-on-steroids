@@ -281,7 +281,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
                         + nFontHeight + 420);
 
-        strDisplay = "LEVEL MULTIPLIER: ( Asteroid Pts ) * ( Level Number )";
+        strDisplay = "Level Multiplier: ( Asteroid Pts ) * ( Level Number )";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
                         + nFontHeight + 440);

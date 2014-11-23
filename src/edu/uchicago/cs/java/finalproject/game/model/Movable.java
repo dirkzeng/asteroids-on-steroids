@@ -24,4 +24,17 @@ public interface Movable {
 	public void expire();
 	//for fading objects
 	public void fadeInOut();
+
+
+
+
+    public void setDeltaX(double dSet);
+
+    public void setDeltaY(double dSet);
+
+    public double getDeltaY();
+
+    public double getDeltaX();
+
+    public void setCenter(Point pntParam);
 } //end Movable

@@ -55,8 +55,8 @@ public Bullet(Falcon fal){
         double dX = pnt.x + getDeltaX();
         double dY = pnt.y + getDeltaY();
         setCenter(new Point((int) dX, (int) dY));
-
     }
+
 
     //override the expire method - once an object expires, then remove it from the arrayList. 
 	public void expire(){
