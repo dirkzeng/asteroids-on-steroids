@@ -8,47 +8,40 @@ import java.util.Arrays;
 /**
  * Created by jakehergott on 11/23/14.
  */
-public class BlackHole extends Sprite{
+public class AsteroidBlackHoleDebris extends Sprite {
 
     private int nSpin;
 
-    //radius of a blackhole
-    private final int RAD = 10;
+    //radius of a large asteroid
+    private final int RAD = 25;
 
-    public BlackHole(Point point){
+    //nSize determines if the Asteroid is Large (0), Medium (1), or Small (2)
+    //when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
+    //same for medium asteroid, you should spawn small asteroids
+    //small asteroids get blasted into debris
+    public AsteroidBlackHoleDebris(Point point){
 
         //call Sprite constructor
         super();
 
-        setSpin(10000);
+        setSpin(nSpin);
         setCenter(point);
-        setDeltaX(0);
-        setDeltaY(0);
-
-        setExpire(60);
+        setColor(Color.WHITE);
 
         assignRandomShape();
 
-        setColor(Color.GRAY.darker());
-
         setRadius(RAD);
 
+        setExpire(6);
     }
 
 
     //overridden
     public void move(){
         super.move();
+        //an asteroid spins, so you need to adjust the orientation at each move()
         setOrientation(getOrientation() + getSpin());
 
-    }
-
-    //override the expire method - once an object expires, then remove it from the arrayList.
-    public void expire(){
-        if (getExpire() == 0)
-            CommandCenter.movDebris.remove(this);
-        else
-            setExpire(getExpire() - 1);
     }
 
     public int getSpin() {
@@ -61,14 +54,15 @@ public class BlackHole extends Sprite{
     }
 
     @Override
-    public void draw(Graphics g) {
-        super.draw(g);
-        //fill this polygon (with whatever color it has)
-        g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        g.setColor(Color.GRAY.darker());
-        g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
+    public void expire() {
+        if (getExpire() == 0)
+            CommandCenter.movDebris.remove(this);
+        else
+            assignRandomShape();
+        setExpire(getExpire() - 1);
     }
 
+    //this is for an asteroid only
     public void assignRandomShape ()
     {
         int nSide = Game.R.nextInt( 7 ) + 7;
@@ -104,5 +98,21 @@ public class BlackHole extends Sprite{
         }
         setLengths(dLengths);
 
+    }
+
+    @Override
+    public void draw(Graphics g) {
+        super.draw(g);
+        if(getExpire() % 2 == 0){
+            setColor(Color.GRAY);
+        }else{
+            setColor(Color.DARK_GRAY);
+        }
+        setRadius((int) (getRadius() / 2));
+        //fill this polygon (with whatever color it has)
+        g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
+        //now draw a white border
+        g.setColor(Color.DARK_GRAY);
+        g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }
 }

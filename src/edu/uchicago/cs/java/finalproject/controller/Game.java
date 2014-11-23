@@ -208,31 +208,33 @@ public class Game implements Runnable, KeyListener {
             for (Movable movDebris : CommandCenter.movDebris) {
 
                 if(movDebris instanceof BlackHole) {
+                    if (movFriend instanceof Falcon) {
 
-                    pntFriendCenter = movFriend.getCenter();
-                    pntDebrisCenter = movDebris.getCenter();
-                    nFriendRadiux = movFriend.getRadius();
-                    nDebrisRadiux = movDebris.getRadius();
+                        pntFriendCenter = movFriend.getCenter();
+                        pntDebrisCenter = movDebris.getCenter();
+                        nFriendRadiux = movFriend.getRadius();
+                        nDebrisRadiux = movDebris.getRadius();
 
-                    if (pntDebrisCenter.distance(pntFriendCenter) < (nDebrisRadiux + nFriendRadiux + 110)){
-                        int nBlackX = (movFriend.getCenter().x + movDebris.getCenter().x)/2;
-                        int nBlackY = (movFriend.getCenter().y + movDebris.getCenter().y)/2;
-                        movFriend.setCenter(new Point(nBlackX,nBlackY));
-                    }
-
-                    //detect collision
-                    if (pntFriendCenter.distance(pntDebrisCenter) < (nFriendRadiux + nDebrisRadiux)) {
-
-                        //falcon
-                        if ((movFriend instanceof Falcon)) {
-                            if (!CommandCenter.getFalcon().getProtected()) {
-                                tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
-                                Point point = movFriend.getCenter();
-                                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconBlackHoleDebris(point)));
-                                CommandCenter.spawnFalcon(false);
-                            }
+                        if (pntDebrisCenter.distance(pntFriendCenter) < (nDebrisRadiux + nFriendRadiux + 175)) {
+                            int nBlackX = (movFriend.getCenter().x + movDebris.getCenter().x) / 2;
+                            int nBlackY = (movFriend.getCenter().y + movDebris.getCenter().y) / 2;
+                            movFriend.setCenter(new Point(nBlackX, nBlackY));
                         }
-                    }//end if
+
+                        //detect collision
+                        if (pntFriendCenter.distance(pntDebrisCenter) < (nFriendRadiux + nDebrisRadiux)) {
+
+                            //falcon
+                            if ((movFriend instanceof Falcon)) {
+                                if (!CommandCenter.getFalcon().getProtected()) {
+                                    tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
+                                    Point point = movFriend.getCenter();
+                                    tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconBlackHoleDebris(point)));
+                                    CommandCenter.spawnFalcon(false);
+                                }
+                            }
+                        }//end if
+                    }
                 }
             }//end inner for
         }
@@ -245,38 +247,52 @@ public class Game implements Runnable, KeyListener {
             for (Movable movFoe : CommandCenter.movFoes) {
 
                 if((movDebris instanceof JezzballDebris)) {
-                    pntDebrisCenter = movDebris.getCenter();
-                    pntFoeCenter = movFoe.getCenter();
-                    nDebrisRadiux = movDebris.getRadius();
-                    nFoeRadiux = movFoe.getRadius();
+                    if((movFoe instanceof Asteroid)) {
+                        pntDebrisCenter = movDebris.getCenter();
+                        pntFoeCenter = movFoe.getCenter();
+                        nDebrisRadiux = movDebris.getRadius();
+                        nFoeRadiux = movFoe.getRadius();
 
-                    //detect collision
-                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
-                        killFoe(movFoe);
-                    }//end else
+                        //detect collision
+                        if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
+                            killFoe(movFoe);
+                        }//end else
+                    }
                 }
 
 
                 if((movDebris instanceof BlackHole)) {
-                    pntDebrisCenter = movDebris.getCenter();
-                    pntFoeCenter = movFoe.getCenter();
-                    nDebrisRadiux = movDebris.getRadius();
-                    nFoeRadiux = movFoe.getRadius();
+                    if ((movFoe instanceof Asteroid)) {
+                        pntDebrisCenter = movDebris.getCenter();
+                        pntFoeCenter = movFoe.getCenter();
+                        nDebrisRadiux = movDebris.getRadius();
+                        nFoeRadiux = movFoe.getRadius();
 
-                    //detect collision
-                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
-                        killFoe(movFoe);
-                    }//end else
+                        if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux + 200)) {
+                            int nBlackX = (movFoe.getCenter().x + movDebris.getCenter().x) / 2;
+                            int nBlackY = (movFoe.getCenter().y + movDebris.getCenter().y) / 2;
+                            movFoe.setCenter(new Point(nBlackX, nBlackY));
+                        }
 
-                    if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux + 110)){
-                        int nBlackX = (movFoe.getCenter().x + movDebris.getCenter().x)/2;
-                        int nBlackY = (movFoe.getCenter().y + movDebris.getCenter().y)/2;
-                        movFoe.setCenter(new Point(nBlackX,nBlackY));
+                        //detect collision
+                        if (pntDebrisCenter.distance(pntFoeCenter) < (nDebrisRadiux + nFoeRadiux)) {
+                            //we know foe must be asteroid at this point
+                            if(((Asteroid) movFoe).getSize() == 0){
+                                CommandCenter.setScore(CommandCenter.getScore() + 100 * CommandCenter.getLevel());
+                            }else if(((Asteroid) movFoe).getSize() == 1){
+                                CommandCenter.setScore(CommandCenter.getScore() + 300 * CommandCenter.getLevel());
+                            }else{
+                                CommandCenter.setScore(CommandCenter.getScore() + 700 * CommandCenter.getLevel());
+                            }
+                            int nSpin = ((Asteroid) movFoe).getSpin();
+                            Point point = movFoe.getCenter();
+                            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new AsteroidBlackHoleDebris(point)));
+                            tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
+                        }//end else
+                        //explode/remove foe
                     }
-                    //explode/remove foe
+
                 }
-
-
             }
         }
 
