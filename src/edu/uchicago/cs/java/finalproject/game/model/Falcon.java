@@ -74,7 +74,7 @@ public class Falcon extends Sprite {
 
 		assignPolarPoints(pntCs);
 
-		setColor(Color.GREEN);
+		setColor(Color.CYAN.darker());
 		
 		//put falcon in the middle.
 		setCenter(new Point(Game.DIM.width / 2, Game.DIM.height / 2));
@@ -198,7 +198,7 @@ public class Falcon extends Sprite {
 		//does the fading at the beginning or after hyperspace
 		Color colShip;
 		if (getFadeValue() == 255) {
-			colShip = Color.GREEN;
+			colShip = Color.CYAN.darker();
 		} else {
 			colShip = new Color(adjustColor(getFadeValue(), 200), adjustColor(
 					getFadeValue(), 175), getFadeValue());
@@ -260,6 +260,11 @@ public class Falcon extends Sprite {
 
 
 		} //end if flame
+
+        /*if(bBreaking){
+
+        }*/
+
 
 		drawShipWithColor(g, colShip);
 
