@@ -187,6 +187,8 @@ public class Game implements Runnable, KeyListener {
                             if(movFriend.getHitCount() < 2){
                                 movFriend.setHitCount(movFriend.getHitCount() + 1);
                                 CommandCenter.setFalconHitCount(movFriend.getHitCount());
+                                Point point = movFriend.getCenter();
+                                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconHitDebris(movFriend,point)));
                             }else {
                                 tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
                                 Point point = movFriend.getCenter();

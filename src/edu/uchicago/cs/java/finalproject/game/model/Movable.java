@@ -46,4 +46,5 @@ public interface Movable {
 
     public void setHitCount(int n);
 
+    public int getOrientation();
 } //end Movable

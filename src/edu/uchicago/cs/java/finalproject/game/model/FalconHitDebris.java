@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Created by jakehergott on 11/21/14.
+ * Created by jakehergott on 11/24/14.
  */
-public class FalconDebris extends Sprite{
-
+public class FalconHitDebris extends Sprite{
     private int nSpin;
 
-    private final int RAD = 35;
+    private final int RAD = 40;
 
-    public FalconDebris(Point point){
+    public FalconHitDebris(Movable falcon, Point point){
 
         //call Sprite constructor
         super();
@@ -55,7 +54,11 @@ public class FalconDebris extends Sprite{
 
         setRadius(RAD);
 
-        setExpire(8);
+        setExpire(6);
+
+        setOrientation(falcon.getOrientation());
+        setDeltaX(falcon.getDeltaX());
+        setDeltaY(falcon.getDeltaY());
     }
 
     //overridden
@@ -68,10 +71,11 @@ public class FalconDebris extends Sprite{
         return this.nSpin;
     }
 
-
     public void setSpin(int nSpin) {
         this.nSpin = nSpin;
     }
+
+
 
     @Override
     public void expire() {
@@ -79,50 +83,10 @@ public class FalconDebris extends Sprite{
             CommandCenter.movDebris.remove(this);
         }
         else {
-            if(getExpire() <= 3) {
-                assignRandomShape();
-            }
             setExpire(getExpire() - 1);
         }
     }
 
-    //this is for an asteroid only
-    public void assignRandomShape ()
-    {
-        int nSide = Game.R.nextInt( 7 ) + 7;
-        int nSidesTemp = nSide;
-
-        int[] nSides = new int[nSide];
-        for ( int nC = 0; nC < nSides.length; nC++ )
-        {
-            int n = nC * 48 / nSides.length - 4 + Game.R.nextInt( 8 );
-            if ( n >= 48 || n < 0 )
-            {
-                n = 0;
-                nSidesTemp--;
-            }
-            nSides[nC] = n;
-        }
-
-        Arrays.sort(nSides);
-
-        double[]  dDegrees = new double[nSidesTemp];
-        for ( int nC = 0; nC <dDegrees.length; nC++ )
-        {
-            dDegrees[nC] = nSides[nC] * Math.PI / 24 + Math.PI / 2;
-        }
-        setDegrees( dDegrees);
-
-        double[] dLengths = new double[dDegrees.length];
-        for (int nC = 0; nC < dDegrees.length; nC++) {
-            if(nC %3 == 0)
-                dLengths[nC] = 1 - Game.R.nextInt(40)/100.0;
-            else
-                dLengths[nC] = 1;
-        }
-        setLengths(dLengths);
-
-    }
 
     @Override
     public void draw(Graphics g) {
@@ -134,13 +98,11 @@ public class FalconDebris extends Sprite{
         }else{
             setColor(Color.RED);
         }
-        if(getExpire() <= 3) {
-            setRadius((int) (getRadius() * 2));
-        }
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
         //now draw a red border
         g.setColor(Color.RED);
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }
+
 }
