@@ -25,7 +25,7 @@ public class BlackHole extends Sprite{
         setDeltaX(0);
         setDeltaY(0);
 
-        setExpire(60);
+        setExpire(100);
 
         assignRandomShape();
 

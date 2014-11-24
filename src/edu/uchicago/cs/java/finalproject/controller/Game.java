@@ -56,8 +56,9 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpMusicBackground;
     private Clip clpBreak;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 300;//1200
-    private static final int SPAWN_NEW_JEZZBALL = 400;
+	private static final int SPAWN_NEW_SHIP_FLOATER = 500;//1200
+    private static final int SPAWN_NEW_JEZZBALL = 500;
+    private static final int SPAWN_NEW_STAR = 1000;
 
 
 
@@ -117,6 +118,7 @@ public class Game implements Runnable, KeyListener {
 			tick();
 			spawnNewShipFloater();
             spawnJezzball();
+            spawnStar();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
 														// surround the sleep() in a try/catch block
 														// this simply controls delay time between 
@@ -377,8 +379,35 @@ public class Game implements Runnable, KeyListener {
             int nSpin = ((JezzBall) movFoe).getSpin();
             Point point = movFoe.getCenter();
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));
-            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new BlackHole(point)));
+            //tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new BlackHole(point)));
             tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
+        }else if(movFoe instanceof Star){
+            if(movFoe.getHitCount() < 3){
+                movFoe.setHitCount(movFoe.getHitCount() + 1);
+                movFoe.setRadius((int)(movFoe.getRadius() * 1.2));
+                CommandCenter.setScore(CommandCenter.getScore() + 500);
+            }else if(movFoe.getHitCount() < 6){
+                movFoe.setColor(Color.YELLOW);
+                movFoe.setRadius((int)(movFoe.getRadius() * 1.2));
+                movFoe.setHitCount(movFoe.getHitCount() + 1);
+                CommandCenter.setScore(CommandCenter.getScore() + 500);
+            }else if(movFoe.getHitCount() < 9){
+                movFoe.setColor(Color.ORANGE);
+                movFoe.setRadius((int)(movFoe.getRadius() * 1.2));
+                movFoe.setHitCount(movFoe.getHitCount() + 1);
+                CommandCenter.setScore(CommandCenter.getScore() + 500);
+            }else if(movFoe.getHitCount() < 12){
+                movFoe.setColor(Color.RED);
+                movFoe.setRadius((int)(movFoe.getRadius() * 1.2));
+                movFoe.setHitCount(movFoe.getHitCount() + 1);
+                CommandCenter.setScore(CommandCenter.getScore() + 500);
+            }else{
+                CommandCenter.setScore(CommandCenter.getScore() + 500);
+                Point point = movFoe.getCenter();
+                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new StarDebris(point)));
+                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new BlackHole(point)));
+                tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
+            }
         }
 		//not an asteroid
 		else {
@@ -453,6 +482,12 @@ public class Game implements Runnable, KeyListener {
         }
     }
 
+    private void spawnStar(){
+        if (nTick % (SPAWN_NEW_STAR - nLevel * 7) == 1){
+            CommandCenter.movFoes.add(new Star());
+        }
+    }
+
 	//this method spawns new asteroids
 	private void spawnAsteroids(int nNum) {
 		for (int nC = 0; nC < nNum; nC++) {
@@ -485,8 +520,6 @@ public class Game implements Runnable, KeyListener {
 				CommandCenter.getFalcon().setProtected(true);
 			
 			spawnAsteroids(CommandCenter.getLevel() + 2);
-            /*spawn a new jezzball every level*/
-            CommandCenter.movFoes.add(new JezzBall());
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
 
 		}

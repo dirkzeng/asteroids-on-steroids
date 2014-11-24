@@ -35,7 +35,8 @@ public abstract class Sprite implements Movable {
 	//for drawing alternative 
 	//public double[] dLengthAlts;
 	//public double[] dDegreeAlts;
-	
+
+    private int nHitCount;
 
 	//fade value for fading in and out
 	private int nFade;
@@ -157,6 +158,14 @@ public abstract class Sprite implements Movable {
 		nRadius = n;
 
 	}
+
+    public int getHitCount(){
+        return nHitCount;
+    }
+
+    public void setHitCount(int n){
+        nHitCount = n;
+    }
 
 	public Dimension getDim() {
 		return dim;

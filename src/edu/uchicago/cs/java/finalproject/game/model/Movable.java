@@ -37,4 +37,13 @@ public interface Movable {
     public double getDeltaX();
 
     public void setCenter(Point pntParam);
+
+    public void setRadius(int n);
+
+    public void setColor(Color col);
+
+    public int getHitCount();
+
+    public void setHitCount(int n);
+
 } //end Movable
