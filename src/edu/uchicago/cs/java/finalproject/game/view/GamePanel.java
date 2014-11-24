@@ -70,7 +70,19 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		} else {
 			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE", nFontWidth, nFontHeight);
 		}
-	}
+        g.drawString("SHIELDS: " , 940,nFontHeight);
+        g.setColor(Color.CYAN.darker());
+        g.drawRect(1000, 5, 75, 10);
+        if(CommandCenter.getFalconHitCount() == 0){
+            g.fillRect(1000,5,75,10);
+        }else if(CommandCenter.getFalconHitCount() == 1) {
+            g.fillRect(1000, 5, 50, 10);
+        }else if(CommandCenter.getFalconHitCount() == 2) {
+            g.setColor(Color.RED);
+            g.fillRect(1000, 5, 25, 10);
+            g.drawRect(1000, 5, 75, 10);
+        }
+    }
 	
 	@SuppressWarnings("unchecked")
 	public void update(Graphics g) {

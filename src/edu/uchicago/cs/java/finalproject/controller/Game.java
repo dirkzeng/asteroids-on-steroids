@@ -56,9 +56,9 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpMusicBackground;
     private Clip clpBreak;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 500;//1200
-    private static final int SPAWN_NEW_JEZZBALL = 500;
-    private static final int SPAWN_NEW_STAR = 1000;
+	private static final int SPAWN_NEW_SHIP_FLOATER = 800;//1200
+    private static final int SPAWN_NEW_JEZZBALL = 450;
+    private static final int SPAWN_NEW_STAR = 650;
 
 
 
@@ -184,10 +184,16 @@ public class Game implements Runnable, KeyListener {
 					//falcon
 					if ((movFriend instanceof Falcon) ){
 						if (!CommandCenter.getFalcon().getProtected()){
-							tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
-                            Point point = movFriend.getCenter();
-                            tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconDebris(point)));
-							CommandCenter.spawnFalcon(false);
+                            if(movFriend.getHitCount() < 2){
+                                movFriend.setHitCount(movFriend.getHitCount() + 1);
+                                CommandCenter.setFalconHitCount(movFriend.getHitCount());
+                            }else {
+                                tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
+                                Point point = movFriend.getCenter();
+                                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconDebris(point)));
+                                CommandCenter.spawnFalcon(false);
+                                CommandCenter.setFalconHitCount(0);
+                            }
 							killFoe(movFoe);
 						}
 					}
@@ -233,6 +239,7 @@ public class Game implements Runnable, KeyListener {
                                     Point point = movFriend.getCenter();
                                     tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconBlackHoleDebris(point)));
                                     CommandCenter.spawnFalcon(false);
+                                    CommandCenter.setFalconHitCount(0);
                                 }
                             }
                         }//end if

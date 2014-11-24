@@ -9,6 +9,7 @@ import edu.uchicago.cs.java.finalproject.sounds.Sound;
 public class CommandCenter {
 
 	private static int nNumFalcon;
+    private static int nFalconHitCount = 0;
     private static int nNuke;
 	private static int nLevel;
 	private static long lScore;
@@ -109,6 +110,14 @@ public class CommandCenter {
 
     public static void setNumNuke(int nParam){
         nNuke = nParam;
+    }
+
+    public static int getFalconHitCount(){
+        return nFalconHitCount;
+    }
+
+    public static void setFalconHitCount(int n){
+        nFalconHitCount = n;
     }
 
 	

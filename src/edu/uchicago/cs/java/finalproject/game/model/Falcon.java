@@ -85,6 +85,8 @@ public class Falcon extends Sprite {
 		//this is the size of the falcon
 		setRadius(35);
 
+        setHitCount(0);
+
 		//these are falcon specific
 		setProtected(true);
 		setFadeValue(0);
