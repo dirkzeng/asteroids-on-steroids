@@ -293,10 +293,15 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
                         + nFontHeight + 420);
 
-        strDisplay = "Level Multiplier: ( Asteroid Pts ) * ( Level Number )";
+        strDisplay = "Star: 500 Pts per hit";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
                         + nFontHeight + 440);
+
+        strDisplay = "Level Multiplier: ( Asteroid Pts ) * ( Level Number )";
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+                        + nFontHeight + 460);
 		/*
 		strDisplay = "left pinkie on 'A' for Shield";
 		grpOff.drawString(strDisplay,
