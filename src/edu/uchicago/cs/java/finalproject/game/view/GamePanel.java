@@ -66,9 +66,9 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		g.setColor(Color.white);
 		g.setFont(fnt);
 		if (CommandCenter.getScore() != 0) {
-			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          SCORE :  " + CommandCenter.getScore(), nFontWidth, nFontHeight);
+			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          SCORE: " + CommandCenter.getScore() + "          HIGH SCORE: " + CommandCenter.getHighScore(), nFontWidth, nFontHeight);
 		} else {
-			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE", nFontWidth, nFontHeight);
+			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE" + "          HIGH SCORE: " + CommandCenter.getHighScore(), nFontWidth, nFontHeight);
 		}
         g.drawString("SHIELDS: " , 940,nFontHeight);
         g.setColor(Color.CYAN.darker());

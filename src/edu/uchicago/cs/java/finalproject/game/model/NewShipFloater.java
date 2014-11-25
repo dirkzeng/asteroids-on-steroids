@@ -29,15 +29,17 @@ public class NewShipFloater extends Sprite {
 		assignPolarPoints(pntCs);
 
 		setExpire(250);
-		setRadius(50);
 
         nType = (int)(Math.random() * 12);
         if(nType < 5) {
             setColor(Color.BLUE);
+            setRadius(50);
         }else if(nType < 8){
             setColor(Color.PINK);
+            setRadius(75);
         }else{
             setColor(Color.ORANGE);
+            setRadius(25);
         }
 
 		int nX = Game.R.nextInt(10);
@@ -106,7 +108,7 @@ public class NewShipFloater extends Sprite {
 		//now draw a white border
 		g.setColor(Color.WHITE);
 		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        Point point = this.getCenter();
+        /*Point point = this.getCenter();
         int x = (int)(point.getX()) - 11;
         int y = (int)(point.getY()) + 9;
         String strFloater= "";
@@ -119,7 +121,7 @@ public class NewShipFloater extends Sprite {
         }
         g.setColor(Color.BLACK);
         g.setFont(new Font("",Font.BOLD,30));
-        g.drawString(strFloater,x,y);
+        g.drawString(strFloater,x,y);*/
 	}
 
 }

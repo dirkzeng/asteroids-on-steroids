@@ -54,7 +54,6 @@ public class Game implements Runnable, KeyListener {
 
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
-    private Clip clpBreak;
 
 	private static final int SPAWN_NEW_SHIP_FLOATER = 800;//1200
     private static final int SPAWN_NEW_JEZZBALL = 450;
@@ -185,6 +184,7 @@ public class Game implements Runnable, KeyListener {
 					if ((movFriend instanceof Falcon) ){
 						if (!CommandCenter.getFalcon().getProtected()){
                             if(movFriend.getHitCount() < 2){
+                                Sound.playSound("smb_bump.wav");
                                 movFriend.setHitCount(movFriend.getHitCount() + 1);
                                 CommandCenter.setFalconHitCount(movFriend.getHitCount());
                                 Point point = movFriend.getCenter();
@@ -381,16 +381,17 @@ public class Game implements Runnable, KeyListener {
             }
 			//remove the original Foe	
 			tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
-
-			
-		}else if(movFoe instanceof JezzBall){
+		}
+        else if(movFoe instanceof JezzBall){
+            Sound.playSound("gunshot.wav");
             CommandCenter.setScore(CommandCenter.getScore() + 3000);
             int nSpin = ((JezzBall) movFoe).getSpin();
             Point point = movFoe.getCenter();
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new JezzballDebris(nSpin,point)));
             //tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new BlackHole(point)));
             tupMarkForRemovals.add(new Tuple(CommandCenter.movFoes, movFoe));
-        }else if(movFoe instanceof Star){
+        }
+        else if(movFoe instanceof Star){
             if(movFoe.getHitCount() < 3){
                 movFoe.setHitCount(movFoe.getHitCount() + 1);
                 movFoe.setRadius((int)(movFoe.getRadius() * 1.2));
@@ -411,6 +412,7 @@ public class Game implements Runnable, KeyListener {
                 movFoe.setHitCount(movFoe.getHitCount() + 1);
                 CommandCenter.setScore(CommandCenter.getScore() + 500);
             }else{
+                Sound.playSound("imploding.wav");
                 CommandCenter.setScore(CommandCenter.getScore() + 500);
                 Point point = movFoe.getCenter();
                 tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new StarDebris(point)));
@@ -428,6 +430,7 @@ public class Game implements Runnable, KeyListener {
 
     private void releaseNuke(){
         if(CommandCenter.getNumNuke() > 0) {
+            Sound.playSound("explosion-02.wav");
             tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new NuclearDebris()));
             //protect falcon from getting hit right after nuke and while nuke
             CommandCenter.getFalcon().setProtected(true);
@@ -619,7 +622,7 @@ public class Game implements Runnable, KeyListener {
 			//special is a special weapon, current it just fires the cruise missile. 
 			case SPECIAL:
 				CommandCenter.movFriends.add(new Cruise(fal));
-				//Sound.playSound("laser.wav");
+				Sound.playSound("tos-photon-torpedo-1.wav");
 				break;
 				
 			case LEFT:
