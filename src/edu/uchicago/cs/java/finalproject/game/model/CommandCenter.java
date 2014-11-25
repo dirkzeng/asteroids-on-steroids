@@ -73,12 +73,12 @@ public class CommandCenter {
 	}
 	
 	public static boolean isGameOver() {		//if the number of falcons is zero, then game over
-		if (getNumFalcons() == 0) {
-            /*set high score to score if score is greater than high score*/
+        /*set high score to score if score is greater than high score*/
+        if(lScore > lHighScore){
+            lHighScore = lScore;
+        }
+        if (getNumFalcons() == 0) {
             Sound.playSound("smb_gameover.wav");
-            if(lScore > lHighScore) {
-                lHighScore = lScore;
-            }
 			return true;
 		}
 		return false;
