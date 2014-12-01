@@ -24,7 +24,7 @@ public class Game implements Runnable, KeyListener {
 	// FIELDS
 	// ===============================================
 
-	public static final Dimension DIM = new Dimension(1100, 800); //the dimension of the game. (should be 1100,900)
+	public static final Dimension DIM = new Dimension(1100, 800); //the dimension of the game.
 	private GamePanel gmpPanel;
 	public static Random R = new Random();
 	public final static int ANI_DELAY = 45; // milliseconds between screen
@@ -57,7 +57,7 @@ public class Game implements Runnable, KeyListener {
 	private Clip clpThrust;
 	private Clip clpMusicBackground;
 
-	private static final int SPAWN_NEW_SHIP_FLOATER = 800;//1200
+	private static final int SPAWN_NEW_SHIP_FLOATER = 800;
     private static final int SPAWN_NEW_JEZZBALL = 450;
     private static final int SPAWN_NEW_STAR = 650;
 
@@ -74,7 +74,6 @@ public class Game implements Runnable, KeyListener {
 
 		clpThrust = Sound.clipForLoopFactory("whitenoise.wav");
 		clpMusicBackground = Sound.clipForLoopFactory("music-background.wav");
-        //clpBreak = Sound.clipForLoopFactory("pacman_eatghost.wav");
 	
 
 	}
@@ -83,12 +82,8 @@ public class Game implements Runnable, KeyListener {
 	// ==METHODS
 	// ===============================================
 
-	public static void main(String args[]) {//throws FileNotFoundException{
+	public static void main(String args[]) {
 
-        /*File highscoreFile = new File("highscore.txt");
-        Scanner in = new Scanner(highscoreFile);
-        CommandCenter.setHighScore(in.nextLong());
-        in.close();*/
 
 		EventQueue.invokeLater(new Runnable() { // uses the Event dispatch thread from Java 5 (refactored)
 					public void run() {
@@ -493,8 +488,6 @@ public class Game implements Runnable, KeyListener {
 		CommandCenter.setLevel(0);
 		CommandCenter.setPlaying(true);
 		CommandCenter.setPaused(false);
-		//if (!bMuted)
-		   // clpMusicBackground.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
     private void spawnJezzball(){
@@ -589,8 +582,6 @@ public class Game implements Runnable, KeyListener {
 				break;
             case DOWN:
                 fal.breakOn();
-                //if (!CommandCenter.isPaused())
-                  //  clpBreak.loop(Clip.LOOP_CONTINUOUSLY);
                 break;
 			case LEFT:
 				fal.rotateLeft();
@@ -646,7 +637,6 @@ public class Game implements Runnable, KeyListener {
 				break;
             case DOWN:
                 fal.breakOff();
-                //clpBreak.stop();
                 break;
 			case MUTE:
 				if (!bMuted){
