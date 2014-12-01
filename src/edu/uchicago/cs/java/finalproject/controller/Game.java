@@ -61,6 +61,9 @@ public class Game implements Runnable, KeyListener {
     private static final int SPAWN_NEW_JEZZBALL = 450;
     private static final int SPAWN_NEW_STAR = 650;
 
+    private int nCruiseDelay;
+    private Cruise cruise;
+
 
 
 	// ===============================================
@@ -121,6 +124,7 @@ public class Game implements Runnable, KeyListener {
 			spawnNewShipFloater();
             spawnJezzball();
             spawnStar();
+            reloadCruise();
 			gmpPanel.update(gmpPanel.getGraphics()); // update takes the graphics context we must 
 														// surround the sleep() in a try/catch block
 														// this simply controls delay time between 
@@ -226,7 +230,7 @@ public class Game implements Runnable, KeyListener {
             for (Movable movDebris : CommandCenter.movDebris) {
 
                 if(movDebris instanceof BlackHole) {
-                    if (movFriend instanceof Falcon) {
+                    //if (movFriend instanceof Falcon) {
 
                         pntFriendCenter = movFriend.getCenter();
                         pntDebrisCenter = movDebris.getCenter();
@@ -251,9 +255,14 @@ public class Game implements Runnable, KeyListener {
                                     CommandCenter.spawnFalcon(false);
                                     CommandCenter.setFalconHitCount(0);
                                 }
+                            }else{ //its a cruise missile
+                                tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
+                                nCruiseDelay = 0;
+                                Point point = movFriend.getCenter();
+                                tupMarkForAdds.add(new Tuple(CommandCenter.movDebris, new FalconBlackHoleDebris(point)));
                             }
                         }//end if
-                    }
+                    //}
                 }
             }//end inner for
         }
@@ -464,6 +473,29 @@ public class Game implements Runnable, KeyListener {
         }
     }
 
+    private void releaseCruise(){
+        if(nCruiseDelay == 0){
+            cruise = new Cruise(CommandCenter.getFalcon());
+            CommandCenter.movFriends.add(cruise);
+            nCruiseDelay = 100;
+            Sound.playSound("tos-photon-torpedo-1.wav");
+        }
+    }
+
+    private void reloadCruise(){
+        if(nCruiseDelay > 83){
+            nCruiseDelay = nCruiseDelay - 1;
+        }else if(nCruiseDelay > 0){
+            nCruiseDelay = nCruiseDelay - 1;
+            cruise.setColor(Color.CYAN);
+            if(nCruiseDelay % 3 == 0) {
+                CommandCenter.movFriends.add(new BulletCruise(cruise));
+                Sound.playSound("laser.wav");
+            }
+        }
+
+    }
+
 	//some methods for timing events in the game,
 	//such as the appearance of UFOs, floaters (power-ups), etc. 
 	public void tick() {
@@ -625,8 +657,7 @@ public class Game implements Runnable, KeyListener {
 				
 			//special is a special weapon, current it just fires the cruise missile. 
 			case SPECIAL:
-				CommandCenter.movFriends.add(new Cruise(fal));
-				Sound.playSound("tos-photon-torpedo-1.wav");
+                releaseCruise();
 				break;
 				
 			case LEFT:

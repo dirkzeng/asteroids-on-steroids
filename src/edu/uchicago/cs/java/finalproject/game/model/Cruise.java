@@ -10,8 +10,9 @@ import edu.uchicago.cs.java.finalproject.controller.Game;
 public class Cruise extends Sprite {
 
 	private final double FIRE_POWER = 15.0;
-	private final int MAX_EXPIRE = 25;
-	
+	private final int MAX_EXPIRE = 100;
+	private int nSpin;
+
 	//for drawing alternative shapes
 	//you could have more than one of these sets so that your sprite morphs into various shapes
 	//throughout its life
@@ -69,6 +70,15 @@ public class Cruise extends Sprite {
 
 	}
 
+    public int getSpin() {
+        return this.nSpin;
+    }
+
+
+    public void setSpin(int nSpin) {
+        this.nSpin = nSpin;
+    }
+
 	
 	//assign for alt imag
 	protected void assignPolorPointsAlts(ArrayList<Point> pntCs) {
@@ -87,7 +97,15 @@ public class Cruise extends Sprite {
 			setDeltaY(getDeltaY() * 1.07);
 		}
 
+        if (getExpire() < MAX_EXPIRE -15){
+            setDeltaX(0);
+            setDeltaY(0);
+        }
 
+        if (getExpire() < MAX_EXPIRE -17){
+            setSpin(10);
+            setOrientation(getOrientation() + getSpin());
+        }
 
 
 	}
