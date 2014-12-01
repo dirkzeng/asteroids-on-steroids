@@ -1,8 +1,10 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
 
+
 import java.awt.*;
 import java.util.ArrayList;
+
 
 /**
  * Created by jakehergott on 11/24/14.
@@ -91,13 +93,24 @@ public class StarDebris extends Sprite {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        if(getExpire() % 2 == 0){
-            setColor(Color.GRAY);
-        }else{
-            setColor(Color.DARK_GRAY);
+        if(getExpire() > 10) {
+            if(getExpire() % 2 == 0){
+                setColor(Color.RED);
+            }else{
+                setColor(Color.RED.darker());
+            }
+            setRadius((int) (getRadius() * 1.2));
         }
-        setRadius((int) (getRadius() / 1.2));
+        else {
+            if (getExpire() % 2 == 0) {
+                setColor(Color.GRAY);
+            } else {
+                setColor(Color.DARK_GRAY);
+            }
+            setRadius((int) (getRadius() / 1.2));
+        }
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }
+
 }
