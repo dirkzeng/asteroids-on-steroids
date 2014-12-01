@@ -203,6 +203,10 @@ public class Game implements Runnable, KeyListener {
 							killFoe(movFoe);
 						}
 					}
+                    else if(movFriend instanceof Cruise){
+                        //let cruise expire... cruise does not remove after collision
+                        killFoe(movFoe);
+                    }
 					//not the falcon
 					else {
 						tupMarkForRemovals.add(new Tuple(CommandCenter.movFriends, movFriend));
