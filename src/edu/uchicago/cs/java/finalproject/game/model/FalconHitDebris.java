@@ -54,7 +54,7 @@ public class FalconHitDebris extends Sprite{
 
         setRadius(RAD);
 
-        setExpire(6);
+        setExpire(3);
 
         setOrientation(falcon.getOrientation());
         setDeltaX(falcon.getDeltaX());

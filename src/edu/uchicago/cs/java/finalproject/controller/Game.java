@@ -3,6 +3,8 @@ package edu.uchicago.cs.java.finalproject.controller;
 import sun.audio.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -81,7 +83,13 @@ public class Game implements Runnable, KeyListener {
 	// ==METHODS
 	// ===============================================
 
-	public static void main(String args[]) {
+	public static void main(String args[]) {//throws FileNotFoundException{
+
+        /*File highscoreFile = new File("highscore.txt");
+        Scanner in = new Scanner(highscoreFile);
+        CommandCenter.setHighScore(in.nextLong());
+        in.close();*/
+
 		EventQueue.invokeLater(new Runnable() { // uses the Event dispatch thread from Java 5 (refactored)
 					public void run() {
 						try {
@@ -105,7 +113,7 @@ public class Game implements Runnable, KeyListener {
 	// implements runnable - must have run method
 	public void run() {
 
-		// lower this thread's priority; let the "main" aka 'Event Dispatch'
+        // lower this thread's priority; let the "main" aka 'Event Dispatch'
 		// thread do what it needs to do first
 		thrAnim.setPriority(Thread.MIN_PRIORITY);
 
@@ -143,6 +151,7 @@ public class Game implements Runnable, KeyListener {
 			}
 		} // end while
 	} // end run
+
 
 	private void checkCollisions() {
 

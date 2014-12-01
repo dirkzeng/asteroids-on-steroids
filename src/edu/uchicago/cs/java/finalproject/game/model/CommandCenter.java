@@ -78,6 +78,9 @@ public class CommandCenter {
             setHighScore(lScore);
         }
         if (getNumFalcons() == 0) {
+            if(lScore > lHighScore){
+                setHighScore(lScore);
+            }
             Sound.playSound("smb_gameover.wav");
 			return true;
 		}
