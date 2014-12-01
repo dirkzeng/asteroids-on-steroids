@@ -1,10 +1,8 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import edu.uchicago.cs.java.finalproject.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -28,6 +26,7 @@ public class Star extends Sprite{
         setExpire(1000);
         ArrayList<Point> pntCs = new ArrayList<Point>();
 
+        //draw star
         pntCs.add(new Point(0, 8));
         pntCs.add(new Point(1, 4));
         pntCs.add(new Point(2, 3));

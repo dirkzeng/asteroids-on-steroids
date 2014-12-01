@@ -9,7 +9,7 @@ public class NewShipFloater extends Sprite {
 
 
 	private int nSpin;
-    private int nType; //which power up... 0 is blue, 1 is pink, 2 is orange
+    private int nType; //which power up it is
 
 	public NewShipFloater() {
 
@@ -30,7 +30,7 @@ public class NewShipFloater extends Sprite {
 
 		setExpire(250);
 
-        nType = (int)(Math.random() * 12);
+        nType = (int)(Math.random() * 12);//sets the type of floater
         if(nType < 5) {
             setColor(Color.BLUE);
             setRadius(50);
@@ -108,20 +108,6 @@ public class NewShipFloater extends Sprite {
 		//now draw a white border
 		g.setColor(Color.WHITE);
 		g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        /*Point point = this.getCenter();
-        int x = (int)(point.getX()) - 11;
-        int y = (int)(point.getY()) + 9;
-        String strFloater= "";
-        if(nType < 5){
-            strFloater = "L";
-        }else if(nType < 8){
-            strFloater = "P";
-        }else{
-            strFloater = "N";
-        }
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("",Font.BOLD,30));
-        g.drawString(strFloater,x,y);*/
 	}
 
 }

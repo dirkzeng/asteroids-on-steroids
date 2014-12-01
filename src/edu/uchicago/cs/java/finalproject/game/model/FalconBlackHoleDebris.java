@@ -13,13 +13,10 @@ public class FalconBlackHoleDebris extends Sprite {
 
     private int nSpin;
 
-    //radius of a large asteroid
+    //radius of a falcon
     private final int RAD = 35;
 
-    //nSize determines if the Asteroid is Large (0), Medium (1), or Small (2)
-    //when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
-    //same for medium asteroid, you should spawn small asteroids
-    //small asteroids get blasted into debris
+
     public FalconBlackHoleDebris(Point point){
 
         //call Sprite constructor
@@ -66,7 +63,7 @@ public class FalconBlackHoleDebris extends Sprite {
     //overridden
     public void move(){
         super.move();
-        //an asteroid spins, so you need to adjust the orientation at each move()
+        
         setOrientation(getOrientation() + getSpin());
     }
 

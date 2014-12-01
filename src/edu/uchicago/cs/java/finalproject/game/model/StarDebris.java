@@ -1,10 +1,8 @@
 package edu.uchicago.cs.java.finalproject.game.model;
 
-import edu.uchicago.cs.java.finalproject.controller.Game;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by jakehergott on 11/24/14.
@@ -28,6 +26,7 @@ public class StarDebris extends Sprite {
 
         ArrayList<Point> pntCs = new ArrayList<Point>();
 
+        //draw a star
         pntCs.add(new Point(0, 8));
         pntCs.add(new Point(1, 4));
         pntCs.add(new Point(2, 3));
@@ -65,7 +64,7 @@ public class StarDebris extends Sprite {
     //overridden
     public void move(){
         super.move();
-        //an asteroid spins, so you need to adjust the orientation at each move()
+
         setOrientation(getOrientation() + getSpin());
 
     }

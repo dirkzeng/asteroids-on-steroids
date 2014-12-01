@@ -15,10 +15,6 @@ public class JezzballDebris extends Sprite{
     //radius of a large asteroid
     private final int RAD = 25;
 
-    //nSize determines if the Asteroid is Large (0), Medium (1), or Small (2)
-    //when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
-    //same for medium asteroid, you should spawn small asteroids
-    //small asteroids get blasted into debris
     public JezzballDebris(int nSpin, Point point){
 
         //call Sprite constructor
@@ -62,7 +58,6 @@ public class JezzballDebris extends Sprite{
             setExpire(getExpire() - 1);
     }
 
-    //this is for an asteroid only
     public void assignRandomShape ()
     {
         int nSide = Game.R.nextInt( 7 ) + 7;
@@ -113,7 +108,7 @@ public class JezzballDebris extends Sprite{
         setRadius((int)(getRadius()*1.5));
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        //now draw a white border
+        //now draw a red border
         g.setColor(Color.RED);
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }

@@ -12,13 +12,9 @@ public class AsteroidDebris extends Sprite {
 
     private int nSpin;
 
-    //radius of a large asteroid
     private final int RAD = 25;
 
-    //nSize determines if the Asteroid is Large (0), Medium (1), or Small (2)
-    //when you explode a Large asteroid, you should spawn 2 or 3 medium asteroids
-    //same for medium asteroid, you should spawn small asteroids
-    //small asteroids get blasted into debris
+
     public AsteroidDebris(int nSpin, Point point){
 
         //call Sprite constructor
@@ -110,7 +106,7 @@ public class AsteroidDebris extends Sprite {
         }
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        //now draw a white border
+        //now draw a orange border
         g.setColor(Color.ORANGE);
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }

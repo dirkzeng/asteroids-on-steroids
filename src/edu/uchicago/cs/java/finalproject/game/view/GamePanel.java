@@ -51,7 +51,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		initView();
 		
 		gmf.setSize(dim);
-		gmf.setTitle("Game Base");
+		gmf.setTitle("ASTEROIDS ON STEROIDS");
 		gmf.setResizable(false);
 		gmf.setVisible(true);
 		this.setFocusable(true);
@@ -70,6 +70,8 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 		} else {
 			g.drawString("LEVEL: " + CommandCenter.getLevel() + "          NO SCORE" + "          HIGH SCORE: " + CommandCenter.getHighScore(), nFontWidth, nFontHeight);
 		}
+
+        //shields meter
         g.drawString("SHIELDS: " , 940,nFontHeight);
         g.setColor(Color.CYAN.darker());
         g.drawRect(1000, 5, 75, 10);
@@ -174,7 +176,7 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 							+ fal.getDegrees()[nC])));
 		}
 		
-		//set the color to green
+		//set the color to Cyan
 		g.setColor(Color.CYAN.darker());
 		//for each falcon left (not including the one that is playing)
 		for (int nD = 1; nD < CommandCenter.getNumFalcons(); nD++) {
@@ -210,9 +212,6 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
         grpOff.setFont(fnt);
         grpOff.setColor(Color.WHITE);
         fmt = gmf.getFontMetrics(fnt);
-		/*strDisplay = "GAME OVER";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4);*/
 
 		strDisplay = "use the arrow keys to turn and thrust";
 		grpOff.drawString(strDisplay,
@@ -224,94 +223,97 @@ import edu.uchicago.cs.java.finalproject.game.model.Movable;
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ nFontHeight + 40);
 
-        strDisplay = "'N' to release nuke";
+        strDisplay = "'F' for missile";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
                         + nFontHeight + 80);
 
-		strDisplay = "'S' to Start";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 120);
 
-		strDisplay = "'P' to Pause";
+        strDisplay = "'N' to release nuke";
+        grpOff.drawString(strDisplay,
+                (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+                        + nFontHeight + 120);
+
+		strDisplay = "'S' to Start";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ nFontHeight + 160);
 
+		strDisplay = "'P' to Pause";
+		grpOff.drawString(strDisplay,
+				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
+						+ nFontHeight + 200);
+
         strDisplay = "'Q' to Quit";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 200);
+                        + nFontHeight + 240);
 
         strDisplay = "BONUSES";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 240);
+                        + nFontHeight + 280);
 
         strDisplay = "BLUE: Extra Life";
         grpOff.setColor(Color.BLUE);
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 260);
+                        + nFontHeight + 300);
 
         strDisplay = "PINK: 1500 Pts";
         grpOff.setColor(Color.PINK);
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 280);
+                        + nFontHeight + 320);
 
         strDisplay = "ORANGE: Extra Nuke";
         grpOff.setColor(Color.ORANGE);
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 300);
+                        + nFontHeight + 340);
 
         strDisplay = "SCORING";
         grpOff.setColor(Color.WHITE);
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 340);
+                        + nFontHeight + 380);
 
         strDisplay = "Big Asteroid: 100 Pts";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 360);
+                        + nFontHeight + 400);
 
         strDisplay = "Medium Asteroid: 300 Pts";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 380);
+                        + nFontHeight + 420);
 
         strDisplay = "Small Asteroid: 700 Pts";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 400);
+                        + nFontHeight + 440);
 
         strDisplay = "Comet: 3000 Pts";//this is the jezzball
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 420);
+                        + nFontHeight + 460);
 
         strDisplay = "Star: 500 Pts per hit";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 440);
+                        + nFontHeight + 480);
 
         strDisplay = "Level Multiplier: ( Asteroid Pts ) * ( Level Number )";
         grpOff.drawString(strDisplay,
                 (Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-                        + nFontHeight + 460);
+                        + nFontHeight + 500);
 		/*
 		strDisplay = "left pinkie on 'A' for Shield";
 		grpOff.drawString(strDisplay,
 				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
 						+ nFontHeight + 240);
 
-		strDisplay = "left index finger on 'F' for Guided Missile";
-		grpOff.drawString(strDisplay,
-				(Game.DIM.width - fmt.stringWidth(strDisplay)) / 2, Game.DIM.height / 4
-						+ nFontHeight + 280);
+
 
 		strDisplay = "'Numeric-Enter' for Hyperspace";
 		grpOff.drawString(strDisplay,

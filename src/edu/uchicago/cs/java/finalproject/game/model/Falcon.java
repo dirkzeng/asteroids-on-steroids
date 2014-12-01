@@ -104,33 +104,7 @@ public class Falcon extends Sprite {
             setDeltaY(0);
         }else{
             super.move();
-            /*Point pnt = getCenter();
-            double dX = pnt.x + getDeltaX();
-            double dY = pnt.y + getDeltaY();
 
-            //this just keeps the sprite inside the bounds of the frame
-        //THIS ACTUALLY MAKES THE SPRITE BOUNCE
-            if (pnt.x > getDim().width) {
-                //setCenter(new Point(1, pnt.y));
-                setCenter(new Point(getDim().width - 1, pnt.y));
-                setDeltaX(getDeltaX() * -1);
-
-            } else if (pnt.x < 0) {
-                //setCenter(new Point(getDim().width - 1, pnt.y));
-                setCenter(new Point(1, pnt.y));
-                setDeltaX(getDeltaX() * -1);
-            } else if (pnt.y > getDim().height) {
-                //setCenter(new Point(pnt.x, 1));
-                setCenter(new Point(pnt.x, getDim().height - 1));
-                setDeltaY(getDeltaY() * -1);
-            } else if (pnt.y < 0) {
-                //setCenter(new Point(pnt.x, getDim().height - 1));
-                setCenter(new Point(pnt.x, 1));
-                setDeltaY(getDeltaY() * -1);
-            } else {
-
-                setCenter(new Point((int) dX, (int) dY));
-            }*/
 
             if (bThrusting) {
                 bFlame = true;

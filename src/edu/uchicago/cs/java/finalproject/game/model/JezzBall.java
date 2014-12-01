@@ -26,21 +26,6 @@ public class JezzBall extends Sprite {
         setDeltaY(10);
 
         setExpire(200);
-        /*ArrayList<Point> pntCs = new ArrayList<Point>();
-
-        // circle jezzball
-        pntCs.add(new Point(0, 10));
-        pntCs.add(new Point(5, 5));
-        pntCs.add(new Point(10, 0));
-        pntCs.add(new Point(5, -5));
-        pntCs.add(new Point(0, -10));
-        pntCs.add(new Point(-5, -5));
-        pntCs.add(new Point(-10, 0));
-        pntCs.add(new Point(-5, 5));
-
-
-
-        assignPolarPoints(pntCs);*/
 
         assignRandomShape();
 
@@ -58,23 +43,17 @@ public class JezzBall extends Sprite {
         double dX = pnt.x + getDeltaX();
         double dY = pnt.y + getDeltaY();
 
-        //this just keeps the sprite inside the bounds of the frame
-        /*THIS ACTUALLY MAKES THE SPRITE BOUNCE*/
+        //THIS MAKES THE SPRITE BOUNCE
         if (pnt.x > getDim().width) {
-            //setCenter(new Point(1, pnt.y));
             setCenter(new Point(getDim().width - 1, pnt.y));
             setDeltaX(getDeltaX() * -1);
-
         } else if (pnt.x < 0) {
-            //setCenter(new Point(getDim().width - 1, pnt.y));
             setCenter(new Point(1, pnt.y));
             setDeltaX(getDeltaX() * -1);
         } else if (pnt.y > getDim().height) {
-            //setCenter(new Point(pnt.x, 1));
             setCenter(new Point(pnt.x, getDim().height - 1));
             setDeltaY(getDeltaY() * -1);
         } else if (pnt.y < 0) {
-            //setCenter(new Point(pnt.x, getDim().height - 1));
             setCenter(new Point(pnt.x, 1));
             setDeltaY(getDeltaY() * -1);
         } else {
@@ -109,7 +88,7 @@ public class JezzBall extends Sprite {
         super.draw(g);
         //fill this polygon (with whatever color it has)
         g.fillPolygon(getXcoords(), getYcoords(), dDegrees.length);
-        //now draw a white border
+        //now draw a orange border
         g.setColor(Color.ORANGE);
         g.drawPolygon(getXcoords(), getYcoords(), dDegrees.length);
     }

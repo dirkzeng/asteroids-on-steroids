@@ -26,8 +26,6 @@ public interface Movable {
 	public void fadeInOut();
 
 
-
-
     public void setDeltaX(double dSet);
 
     public void setDeltaY(double dSet);
