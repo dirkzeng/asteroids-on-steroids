@@ -488,7 +488,7 @@ public class Game implements Runnable, KeyListener {
         }else if(nCruiseDelay > 0){
             nCruiseDelay = nCruiseDelay - 1;
             cruise.setColor(Color.CYAN);
-            if(nCruiseDelay % 3 == 0) {
+            if(nCruiseDelay % 2 == 0) {
                 CommandCenter.movFriends.add(new BulletCruise(cruise));
                 Sound.playSound("laser.wav");
             }
