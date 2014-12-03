@@ -1,6 +1,6 @@
 Here is a list of highlighted features I would like to make sure are seen when graded...
 
-STARS:  When stars are spawned they are small and white.  When they collide with friends they grow and change colors.  After 12 collisions and when they are a "red giant" the star expires and spawns a black hole in the location the star was.
+STARS:  When stars are spawned they are small and white.  When they are hit they grow and change colors.  After 12 collisions and when they are a "red giant" the star expires and spawns a black hole in the location the star was.
 
 BLACK HOLES:  Black holes do not move but spin very quickly for effect.  If a moveable collides with the black hole it gets sucked in and expires.  If a moveable is within the radius of the black hole plus a certain amount X (depending on the moveable), it changes direction and gets pulled toward the black hole.
 
