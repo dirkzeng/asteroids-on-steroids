@@ -30,8 +30,8 @@ public class BulletCruise extends Sprite{
 
         //a bullet expires after 20 frames
         setExpire( 20 );
-        setRadius(6);
-        setColor(Color.YELLOW.darker().darker());
+        setRadius(4);
+        setColor(Color.YELLOW);
 
 
         //everything is relative to the falcon ship that fired the bullet
