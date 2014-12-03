@@ -524,6 +524,13 @@ public class Game implements Runnable, KeyListener {
 		CommandCenter.setLevel(0);
 		CommandCenter.setPlaying(true);
 		CommandCenter.setPaused(false);
+
+        for(int i = 0; i < 95; i++) {
+            CommandCenter.movDebris.add(new BackgroundStars(1));
+        }
+        for(int i = 0; i < 5; i++) {
+            CommandCenter.movDebris.add(new BackgroundStars(2));
+        }
 	}
 
     private void spawnJezzball(){
@@ -572,7 +579,7 @@ public class Game implements Runnable, KeyListener {
 			spawnAsteroids(CommandCenter.getLevel() + 2);
 			CommandCenter.setLevel(CommandCenter.getLevel() + 1);
 
-		}
+        }
 	}
 	
 	
